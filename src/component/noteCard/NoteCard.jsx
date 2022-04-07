@@ -6,6 +6,7 @@ import {
   useNoteInputContext,
   useNotesList,
   useToken,
+  useArchivesList,
 } from '../../context/context-index';
 
 export const NoteCard = ({ item, archive }) => {
@@ -14,7 +15,7 @@ export const NoteCard = ({ item, archive }) => {
   const { setNotesList } = useNotesList();
 
   const { note, displayModal, noteDispatch } = useNoteInputContext();
-
+  const { archivesList, setArchivesList } = useArchivesList();
   useEffect(() => {}, [displayModal]);
 
   //delete
@@ -28,7 +29,55 @@ export const NoteCard = ({ item, archive }) => {
   };
 
   //archive
-  const handleArchive = async () => {};
+  const handleArchive = async () => {
+    const archiveResponse = await axios.post(
+      `/api/notes/archives/${id}`,
+      { note: item },
+      {
+        headers: { authorization: token },
+      }
+    );
+
+    if (archiveResponse.status === 200 || archiveResponse.status === 201) {
+      setArchivesList([...archiveResponse.data.archives]);
+      setNotesList([...archiveResponse.data.notes]);
+    }
+  };
+
+  //archive delete
+  const handleDeleteArchive = async () => {
+    try {
+      const delArchResponse = await axios.delete(`/api/archives/delete/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
+      if (delArchResponse.status === 200 || delArchResponse.status === 201) {
+        setArchivesList([...delArchResponse.data.archives]);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  //restore archive
+  const handleArchiveRestore = async () => {
+    try {
+      const restoreArchRes = await axios.post(
+        `/api/archives/restore/${id}`,
+        { archives: item },
+        {
+          headers: { authorization: token },
+        }
+      );
+      if (restoreArchRes.status === 200 || restoreArchRes.status === 201) {
+        setArchivesList([...restoreArchRes.data.archives]);
+        setNotesList([...restoreArchRes.data.notes]);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const handleEdit = async () => {};
 
@@ -52,21 +101,43 @@ export const NoteCard = ({ item, archive }) => {
       </div>
 
       <div className="card-foot note-editing-option">
-        <button
-          className="btn btn-only-icon note-delete"
-          onClick={handleDelete}
-        >
-          <span className="fa-solid fa-trash"></span>
-        </button>
-        <button
-          className="btn btn-only-icon note-archive"
-          onClick={handleArchive}
-        >
-          <span className="fa-solid fa-box"></span>
-        </button>
-        <button className="btn btn-only-icon note-edit" onClick={handleEdit}>
-          <span className="fa-solid fa-pencil"></span>
-        </button>
+        {archive ? (
+          <>
+            <button
+              className="btn btn-only-icon note-delete"
+              onClick={handleDeleteArchive}
+            >
+              <span className="fa-solid fa-trash"></span>
+            </button>
+            <button
+              className="btn btn-only-icon note-archive"
+              onClick={handleArchiveRestore}
+            >
+              <span className="fa-solid fa-box-open"></span>
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              className="btn btn-only-icon note-delete"
+              onClick={handleDelete}
+            >
+              <span className="fa-solid fa-trash"></span>
+            </button>
+            <button
+              className="btn btn-only-icon note-archive"
+              onClick={handleArchive}
+            >
+              <span className="fa-solid fa-box"></span>
+            </button>
+            <button
+              className="btn btn-only-icon note-edit"
+              onClick={handleEdit}
+            >
+              <span className="fa-solid fa-pencil"></span>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
