@@ -6,7 +6,7 @@ import './NotesInputModal.css';
 import { useToken } from '../../context/token-context';
 
 export const NotesInputModal = () => {
-  const { note, display, noteDispatch, editId } = useNoteInputContext();
+  const { note, displayModal, noteDispatch, editId } = useNoteInputContext();
   const { title, description, color, createdAt } = note;
   const { token } = useToken();
   const { noteList, setNotesList } = useNotesList();
@@ -43,7 +43,7 @@ export const NotesInputModal = () => {
               },
               createdAt: '',
             },
-            display: false,
+            displayModal: false,
             editId: '',
           },
         });
@@ -54,7 +54,7 @@ export const NotesInputModal = () => {
     }
   };
 
-  return display ? (
+  return displayModal ? (
     <div className="modal-container notes-modal-container">
       <div className="modal shadow notes-modal ">
         <button
@@ -74,7 +74,7 @@ export const NotesInputModal = () => {
                   },
                   createdAt: '',
                 },
-                display: false,
+                displayModal: false,
                 editId: '',
               },
             });

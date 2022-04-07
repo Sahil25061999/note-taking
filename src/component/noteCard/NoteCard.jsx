@@ -13,9 +13,9 @@ export const NoteCard = ({ item, archive }) => {
   const { token } = useToken();
   const { setNotesList } = useNotesList();
 
-  const { note, display, noteDispatch } = useNoteInputContext();
+  const { note, displayModal, noteDispatch } = useNoteInputContext();
 
-  useEffect(() => {}, [display]);
+  useEffect(() => {}, [displayModal]);
 
   //delete
   const handleDelete = async () => {

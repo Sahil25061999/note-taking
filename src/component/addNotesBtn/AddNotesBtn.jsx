@@ -3,9 +3,9 @@ import './AddNotesBtn.css';
 import { useNoteInputContext } from '../../context/context-index';
 
 export const AddNoteBtn = () => {
-  const { display, noteDispatch } = useNoteInputContext();
+  const { displayModal, noteDispatch } = useNoteInputContext();
   const handleAddClick = () => {
-    noteDispatch({ type: 'DISPLAY', payload: !display });
+    noteDispatch({ type: 'DISPLAY_MODAL', payload: !displayModal });
   };
   return (
     <button className="add-button" onClick={handleAddClick}>

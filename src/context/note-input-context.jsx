@@ -42,8 +42,8 @@ const reducerFunc = (state, action) => {
           tags: { ...state.note.tags, exercise: !state.note.tags.exercise },
         },
       };
-    case 'DISPLAY':
-      return { ...state, display: action.payload };
+    case 'DISPLAY_MODAL':
+      return { ...state, displayModal: action.payload };
     case 'CLEAR_AFTER_ADD':
       return action.payload;
 
@@ -53,19 +53,29 @@ const reducerFunc = (state, action) => {
 };
 
 export const NoteInputProvider = ({ children }) => {
-  const [{ note, display, editId }, noteDispatch] = useReducer(reducerFunc, {
-    note: {
-      title: '',
-      description: '',
-      color: '#ffffff',
-      tags: { work: false, homework: false, creative: false, exercise: false },
-      createdAt: '',
-    },
-    display: false,
-    editId: '',
-  });
+  const [{ note, displayModal, editId }, noteDispatch] = useReducer(
+    reducerFunc,
+    {
+      note: {
+        title: '',
+        description: '',
+        color: '#ffffff',
+        tags: {
+          work: false,
+          homework: false,
+          creative: false,
+          exercise: false,
+        },
+        createdAt: '',
+      },
+      displayModal: false,
+      editId: '',
+    }
+  );
   return (
-    <NoteInputContext.Provider value={{ note, display, noteDispatch, editId }}>
+    <NoteInputContext.Provider
+      value={{ note, displayModal, noteDispatch, editId }}
+    >
       {children}
     </NoteInputContext.Provider>
   );
