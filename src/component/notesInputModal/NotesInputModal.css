@@ -1,0 +1,74 @@
+.notes-modal-container {
+  display: block;
+  backdrop-filter: blur(10px);
+}
+
+.notes-modal {
+  margin-top: 2rem;
+  min-width: 20rem;
+  max-width: 53vw;
+  /* max-height: 5vh; */
+}
+
+.modal-form {
+  width: 95%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.modal-input-title,
+.modal-input-textarea {
+  width: 95%;
+  min-width: fit-content;
+  margin: 0 0 0 0.5rem;
+}
+
+.modal-input-textarea {
+  height: 20rem;
+  /* height: 50%; */
+  max-width: 95%;
+}
+
+.checkbox-container,
+.checkbox-container label,
+.form-bottom {
+  display: flex;
+}
+
+input[type='color'] {
+  cursor: pointer;
+  border-radius: 10rem;
+  border: 5px solid var(--primary-color);
+  height: 2.5rem;
+  width: 2.5rem;
+  appearance: none;
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: 10rem;
+}
+
+.form-content {
+  margin: 0.8rem;
+  width: 85%;
+}
+.tags,
+.tags .modal-input-title {
+  margin: 0;
+}
+
+.modal-title,
+.modal-description {
+  padding-left: 1rem;
+  margin-bottom: 2px;
+}

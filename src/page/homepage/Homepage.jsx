@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { AddNoteBtn } from '../../component/addNotesBtn/AddNotesBtn';
-import { useToken } from '../../context/token-context';
+import {
+  AddNoteBtn,
+  NoteCard,
+  NotesInputModal,
+} from '../../component/component-index';
+import { useToken, useNotesList } from '../../context/context-index';
+import './Homepage.css';
 
 export const HomePage = () => {
-  const [notesList, setNotesList] = useState([]);
+  const { notesList, setNotesList } = useNotesList();
   const { token } = useToken();
   useEffect(() => {
     (async () => {
@@ -20,7 +25,12 @@ export const HomePage = () => {
     <div className="main-page">
       <main>
         <AddNoteBtn />
-        <div className="notes-section"></div>
+        <NotesInputModal />
+        <div className="notes-section">
+          {notesList.map((item) => (
+            <NoteCard key={item._id} item={item} />
+          ))}
+        </div>
       </main>
     </div>
   );
