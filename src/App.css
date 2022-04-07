@@ -26,6 +26,10 @@
   padding-right: 2rem;
 }
 
+main {
+  padding-top: 1rem;
+}
+
 @media only screen and (max-width: 64em) {
   body {
     font-size: 87.5%;
