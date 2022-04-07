@@ -4,7 +4,11 @@ import './index.css';
 import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { makeServer } from './server';
-import { TokenProvider } from './context/context-index';
+import {
+  TokenProvider,
+  NotesListProvider,
+  NoteInputProvider,
+} from './context/context-index';
 
 // Call make Server
 makeServer();
@@ -13,7 +17,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <TokenProvider>
-        <App />
+        <NotesListProvider>
+          <NoteInputProvider>
+            <App />
+          </NoteInputProvider>
+        </NotesListProvider>
       </TokenProvider>
     </Router>
   </React.StrictMode>,

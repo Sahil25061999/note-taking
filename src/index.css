@@ -24,7 +24,7 @@ h6 {
   font-family: var(--head-font);
 }
 
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
@@ -32,10 +32,10 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-color);
+  background-color: var(--primary-text-color);
   border-radius: 2rem;
 }
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--hover-color);
   cursor: pointer;
-} */
+}
