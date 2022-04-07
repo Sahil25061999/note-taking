@@ -1,15 +1,21 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { makeServer } from "./server";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { makeServer } from './server';
+import { TokenProvider } from './context/context-index';
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <TokenProvider>
+        <App />
+      </TokenProvider>
+    </Router>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
