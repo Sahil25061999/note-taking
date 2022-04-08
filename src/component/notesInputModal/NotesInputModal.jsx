@@ -1,9 +1,11 @@
 import React from 'react';
-import { useNotesList } from '../../context/notes-list-context';
+import {
+  useNotesList,
+  useNoteInputContext,
+  useToken,
+} from '../../context/context-index';
 import axios from 'axios';
-import { useNoteInputContext } from '../../context/note-input-context';
 import './NotesInputModal.css';
-import { useToken } from '../../context/token-context';
 
 export const NotesInputModal = () => {
   const { note, displayModal, noteDispatch, editId } = useNoteInputContext();
@@ -34,7 +36,7 @@ export const NotesInputModal = () => {
             note: {
               title: '',
               description: '',
-              color: 'white',
+              color: '#ffffff',
               tags: {
                 work: false,
                 homework: false,
@@ -48,7 +50,6 @@ export const NotesInputModal = () => {
           },
         });
       }
-      console.log(response.data.notes);
     } catch (e) {
       console.error(e);
     }

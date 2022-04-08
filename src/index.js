@@ -7,6 +7,7 @@ import { makeServer } from './server';
 import {
   TokenProvider,
   NotesListProvider,
+  ArchivesListProvider,
   NoteInputProvider,
 } from './context/context-index';
 
@@ -17,11 +18,13 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <TokenProvider>
-        <NotesListProvider>
-          <NoteInputProvider>
-            <App />
-          </NoteInputProvider>
-        </NotesListProvider>
+        <ArchivesListProvider>
+          <NotesListProvider>
+            <NoteInputProvider>
+              <App />
+            </NoteInputProvider>
+          </NotesListProvider>
+        </ArchivesListProvider>
       </TokenProvider>
     </Router>
   </React.StrictMode>,
