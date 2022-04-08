@@ -10,10 +10,13 @@ export const Archive = () => {
   return (
     <div className="main-page">
       <main>
-        {archivesList.length !== 0 &&
+        {archivesList.length !== 0 ? (
           archivesList.map((item) => {
             return <NoteCard key={item._id} item={item} archive={true} />;
-          })}
+          })
+        ) : (
+          <h2>No data archived</h2>
+        )}
       </main>
     </div>
   );

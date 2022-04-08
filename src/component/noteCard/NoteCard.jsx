@@ -16,7 +16,6 @@ export const NoteCard = ({ item, archive }) => {
 
   const { note, displayModal, noteDispatch } = useNoteInputContext();
   const { archivesList, setArchivesList } = useArchivesList();
-  useEffect(() => {}, [displayModal]);
 
   //delete
   const handleDelete = async () => {
@@ -101,22 +100,24 @@ export const NoteCard = ({ item, archive }) => {
       </div>
 
       <div className="card-foot note-editing-option">
-        {archive ? (
-          <>
-            <button
-              className="btn btn-only-icon note-delete"
-              onClick={handleDeleteArchive}
-            >
-              <span className="fa-solid fa-trash"></span>
-            </button>
-            <button
-              className="btn btn-only-icon note-archive"
-              onClick={handleArchiveRestore}
-            >
-              <span className="fa-solid fa-box-open"></span>
-            </button>
-          </>
-        ) : (
+        {/* {archive ? (
+          <> */}
+        <button
+          className="btn btn-only-icon note-delete"
+          onClick={archive ? handleDeleteArchive : handleDelete}
+        >
+          <span className="fa-solid fa-trash"></span>
+        </button>
+        <button
+          className="btn btn-only-icon note-archive"
+          onClick={archive ? handleArchiveRestore : handleArchive}
+        >
+          <span
+            className={`fa-solid ${archive ? 'fa-box-open' : 'fa-box'} `}
+          ></span>
+        </button>
+        {/* </> */}
+        {/* ) : (
           <>
             <button
               className="btn btn-only-icon note-delete"
@@ -129,15 +130,15 @@ export const NoteCard = ({ item, archive }) => {
               onClick={handleArchive}
             >
               <span className="fa-solid fa-box"></span>
-            </button>
-            <button
-              className="btn btn-only-icon note-edit"
-              onClick={handleEdit}
-            >
-              <span className="fa-solid fa-pencil"></span>
-            </button>
-          </>
+            </button> */}
+        {!archive && (
+          <button className="btn btn-only-icon note-edit" onClick={handleEdit}>
+            <span className="fa-solid fa-pencil"></span>
+          </button>
         )}
+
+        {/* </>
+        )} */}
       </div>
     </div>
   );
