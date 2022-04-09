@@ -1,0 +1,90 @@
+/* Filter Styles */
+
+.filter-container,
+.filter-elements {
+  display: flex;
+  align-items: center;
+}
+
+.filter-elements {
+  margin-right: 0.5rem;
+}
+
+.filter-input-element {
+  margin-left: 0.5rem;
+}
+
+.filter-clear-btn,
+.filter-clear-btn:hover {
+  color: var(--hover-color);
+  background-color: transparent;
+  font-size: inherit;
+  padding: 0.4rem;
+  border-color: transparent;
+  box-shadow: none;
+  align-self: center;
+}
+
+.checkbox {
+  margin-right: 5px;
+  height: 15px;
+  width: 15px;
+}
+
+.checklist-container {
+  position: relative;
+  width: fit-content;
+}
+
+.checklist-container .checklist-title {
+  border: 1px solid var(--secondary-text-color);
+  background-color: var(--primary-text-color);
+  border-radius: 0.5rem;
+  display: inline-block;
+  padding: 0.4rem;
+}
+
+.checklist-container .checklist-title::after {
+  font-family: FontAwesome;
+  content: '\f107';
+  display: inline-block;
+  padding-left: 10px;
+  vertical-align: middle;
+}
+
+.checklist-title.visible:after {
+  content: '\f106';
+}
+
+.checkbox-list {
+  display: none;
+  position: absolute;
+  height: fit-content;
+  width: max-content;
+  padding: 0.5rem;
+  border: 1px solid var(--secondary-text-color);
+  background-color: var(--primary-text-color);
+  box-shadow: 4px 8px 16px rgba(58, 58, 58, 0.25);
+  border-radius: 0.5rem;
+  transition: 0.2s;
+  transform: scaleY(0);
+}
+
+.checklist-title.visible + .checkbox-list {
+  z-index: 1;
+  display: block;
+  transform: scaleY(1);
+}
+
+.select-input {
+  background-color: var(--primary-text-color);
+  border-radius: 0.5rem;
+  padding: 0.4rem;
+  border: 1px solid var(--secondary-text-color);
+  font-size: inherit;
+}
+
+option {
+  padding: 0.5rem;
+  border: 1px solid var(--secondary-text-color);
+}

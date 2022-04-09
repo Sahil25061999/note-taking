@@ -4,3 +4,4 @@ export { Navbar } from './navbar/Navbar';
 export { SearchBar } from './searchBar/SearchBar';
 export { NotesInputModal } from './notesInputModal/NotesInputModal';
 export { NoteCard } from './noteCard/NoteCard';
+export { Filter } from './filter/Filter';

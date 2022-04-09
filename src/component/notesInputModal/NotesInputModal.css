@@ -7,7 +7,6 @@
   margin-top: 2rem;
   min-width: 20rem;
   max-width: 53vw;
-  /* max-height: 5vh; */
 }
 
 .modal-form {
@@ -30,7 +29,7 @@
 
 .modal-input-textarea {
   height: 20rem;
-  /* height: 50%; */
+
   max-width: 95%;
 }
 
@@ -38,6 +37,17 @@
 .checkbox-container label,
 .form-bottom {
   display: flex;
+  justify-content: space-around;
+}
+.checkbox-container {
+  width: 95%;
+  min-width: fit-content;
+  flex-wrap: wrap;
+  margin-left: auto;
+}
+
+.checkbox {
+  vertical-align: baseline;
 }
 
 input[type='color'] {

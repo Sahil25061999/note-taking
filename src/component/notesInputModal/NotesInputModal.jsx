@@ -4,14 +4,14 @@ import {
   useNoteInputContext,
   useToken,
 } from '../../context/context-index';
-import axios from 'axios';
 import './NotesInputModal.css';
+import { postNote } from '../../api-call/api-index';
 
 export const NotesInputModal = () => {
   const { note, displayModal, noteDispatch, editId } = useNoteInputContext();
   const { title, description, color, createdAt } = note;
   const { token } = useToken();
-  const { noteList, setNotesList } = useNotesList();
+  const { setNotesList } = useNotesList();
   const { work, exercise, homework, creative } = note.tags;
 
   const handleAddNote = async (e) => {
@@ -21,37 +21,28 @@ export const NotesInputModal = () => {
     }
     note.createdAt = new Date();
 
-    try {
-      const response = await axios.post(
-        `/api/notes${editId ? `/${editId}` : ''}`,
-        { note },
-        { headers: { authorization: token } }
-      );
-
-      if (response.status === 200 || response.status === 201) {
-        setNotesList([...response.data.notes]);
-        noteDispatch({
-          type: 'CLEAR_AFTER_ADD',
-          payload: {
-            note: {
-              title: '',
-              description: '',
-              color: '#ffffff',
-              tags: {
-                work: false,
-                homework: false,
-                creative: false,
-                exercise: false,
-              },
-              createdAt: '',
+    const noteResponse = await postNote(editId, note, token);
+    if (noteResponse.status === 200 || noteResponse.status === 201) {
+      setNotesList([...noteResponse.data.notes]);
+      noteDispatch({
+        type: 'CLEAR_AFTER_ADD',
+        payload: {
+          note: {
+            title: '',
+            description: '',
+            color: '#ffffff',
+            tags: {
+              work: false,
+              homework: false,
+              creative: false,
+              exercise: false,
             },
-            displayModal: false,
-            editId: '',
+            createdAt: '',
           },
-        });
-      }
-    } catch (e) {
-      console.error(e);
+          displayModal: false,
+          editId: '',
+        },
+      });
     }
   };
 
@@ -97,7 +88,7 @@ export const NotesInputModal = () => {
               onChange={(e) =>
                 noteDispatch({ type: 'TITLE', payload: e.target.value })
               }
-              class="textbox modal-input-title"
+              className="textbox modal-input-title"
               id="title"
               type="text"
               value={title}
