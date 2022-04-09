@@ -1,7 +1,14 @@
 import './App.css';
 import { Navbar, SideNav } from './component/component-index';
 import { Routes, Route } from 'react-router-dom';
-import { HomePage, Login, Signup, Archive } from './page/page-index';
+import {
+  HomePage,
+  Login,
+  Signup,
+  Logout,
+  Archive,
+  Label,
+} from './page/page-index';
 
 function App() {
   return (
@@ -10,6 +17,8 @@ function App() {
       <div className="body">
         <SideNav />
         <Routes>
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/label" element={<Label />} />
           <Route path="/archive" element={<Archive />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />

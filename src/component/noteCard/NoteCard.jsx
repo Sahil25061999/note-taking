@@ -84,7 +84,9 @@ export const NoteCard = ({ item, archive }) => {
           {Object.keys(item.tags)
             .filter((catKey) => item.tags[catKey])
             .map((badge) => (
-              <span class="badge-text badge-sm badge-accent">{badge}</span>
+              <span key={badge} class="badge-text badge-sm badge-accent">
+                {badge}
+              </span>
             ))}
         </h3>
         <div class="card-content card-description-section">

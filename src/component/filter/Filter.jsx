@@ -125,10 +125,14 @@ const Filter = () => {
         </div>
         <div className="filter-elements filter-sort-element">
           <p>Sort by</p>
+
           <select
             className="select-input filter-input-element"
             onChange={handleSelect}
           >
+            <option disabled selected value>
+              --select option--
+            </option>
             <option
               onChange={() =>
                 filterDispatch({
