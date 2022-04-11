@@ -39,15 +39,15 @@ export const HomePage = () => {
   return (
     <div className="main-page">
       <main>
-        <Filter />
-        <AddNoteBtn />
+        <div className="d-flex home-head">
+          <Filter />
+          <AddNoteBtn />
+        </div>
         <NotesInputModal />
         <div className="notes-section">
-          {filteredList && filteredList.length ? (
-            filteredList.map((item) => <NoteCard key={item._id} item={item} />)
-          ) : (
-            <h2>No data found</h2>
-          )}
+          {filteredList &&
+            filteredList.length &&
+            filteredList.map((item) => <NoteCard key={item._id} item={item} />)}
         </div>
       </main>
     </div>

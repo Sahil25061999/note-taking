@@ -1,3 +1,10 @@
+.dark {
+  color: var(--secondary-text-color);
+  --primary-color: blue;
+  --secondary-text-color: rgb(215, 215, 215);
+  --primary-text-color: rgb(39, 37, 37);
+}
+
 .App {
   width: 100vw;
   display: grid;
@@ -5,12 +12,12 @@
   grid-template-rows: min-content 1fr;
   overflow: hidden;
   position: fixed;
+  background-color: var(--primary-text-color);
 }
 
 .body {
   grid-row: 2;
   display: grid;
-  background-color: rgba(236, 236, 236, 0.65);
   grid-template-columns: 250px 1fr;
   grid-template-rows: 1fr;
   column-gap: 2rem;
@@ -19,17 +26,23 @@
 }
 
 .main-page {
+  position: relative;
   grid-column: 2;
   width: 100%;
   height: 100vh;
   overflow: scroll;
-  padding-right: 2rem;
+  padding-right: 5rem;
   padding-bottom: 7rem;
-  /* margin-bottom: 7rem; */
+}
+
+.error-msg {
+  font-size: 0.75rem;
+  margin-left: 5px;
+  font-weight: bold;
 }
 
 main {
-  padding-top: 1rem;
+  margin-top: 1.5rem;
 }
 
 @media only screen and (max-width: 64em) {
@@ -50,5 +63,6 @@ main {
     grid-column: 1;
     overflow: scroll;
     padding: 1rem;
+    padding-top: 0;
   }
 }

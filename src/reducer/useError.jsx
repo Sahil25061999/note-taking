@@ -8,6 +8,10 @@ const errorReducerFunc = (state, action) => {
       return { ...state, passwordError: action.payload };
     case 'CONFIRM_PASSWORD_ERROR':
       return { ...state, confirmPasswordError: action.payload };
+    case 'NOTE_TITLE_ERROR':
+      return { ...state, noteTitleError: action.payload };
+    case 'NOTE_DESCRIPTION_ERROR':
+      return { ...state, noteDescriptionError: action.payload };
     default:
       return { ...state };
   }
@@ -18,6 +22,8 @@ export const useError = () => {
     emailError: '',
     passwordError: '',
     confirmPasswordError: '',
+    noteTitleError: '',
+    noteDescriptionError: '',
   });
   return [error, errorDispatch];
 };

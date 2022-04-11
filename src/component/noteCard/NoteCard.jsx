@@ -16,7 +16,7 @@ import {
 } from '../../api-call/api-index';
 
 export const NoteCard = ({ item, archive }) => {
-  const { _id: id, title, description, color } = item;
+  const { _id: id, title, description, color, createdAt } = item;
   const { token } = useToken();
   const { setNotesList } = useNotesList();
 
@@ -76,20 +76,20 @@ export const NoteCard = ({ item, archive }) => {
   return (
     <div
       style={{ backgroundColor: color }}
-      class="card card-only-text note-card"
+      className="card card-only-text note-card"
     >
-      <div class="card-head">
-        <h3 class="card-heading d-flex">
-          {title}
+      <div className="card-head">
+        <h3 className="card-heading d-flex">
+          {title} <span className="margin-l-5 badge-sm"> {createdAt}</span>
           {Object.keys(item.tags)
             .filter((catKey) => item.tags[catKey])
             .map((badge) => (
-              <span key={badge} class="badge-text badge-sm badge-accent">
+              <span key={badge} className="badge-text badge-sm badge-accent">
                 {badge}
               </span>
             ))}
         </h3>
-        <div class="card-content card-description-section">
+        <div className="card-content card-description-section">
           <p>{description}</p>
         </div>
       </div>

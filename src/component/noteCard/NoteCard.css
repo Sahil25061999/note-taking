@@ -16,6 +16,13 @@
   justify-content: space-between;
 }
 
+.card-head,
+.card-content,
+.card-foot {
+  color: var(--secondary-text-color);
+  /* mix-blend-mode: difference; */
+}
+
 .note-card .note-editing-option {
   align-self: flex-end;
 }

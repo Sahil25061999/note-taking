@@ -20,25 +20,20 @@ export const Label = () => {
   return (
     <div className="main-page">
       <main>
-        {/* {Object.keys(tagState).forEach((currtag) => {
-          <p>{currtag}</p>; 
-            notesList.map((item) => {
-               currtag === item.tags[currtag] ? (
-                 <NoteCard key={item._id} item={item} />
-              ) : (
-                 ''
-               );
-             });
-         })} */}
         {labelList.map((item) => {
-          return Object.entries(item).map((key, value) => {
+          return Object.entries(item).map(([key, value]) => {
+            if (!value[0]) {
+              return;
+            }
             return (
               <>
-                <h2>{key}</h2>;
+                <h2>{key}</h2>
                 <div>
-                  {value.map((item) => (
-                    <NoteCard key={item._id} item={item} />
-                  ))}
+                  {value.map((item) => {
+                    if (item) {
+                      return <NoteCard key={item._id} item={item} />;
+                    }
+                  })}
                 </div>
               </>
             );
