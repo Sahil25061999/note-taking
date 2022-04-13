@@ -18,7 +18,7 @@ export const HomePage = () => {
     (async () => {
       const response = await getNote(token);
       if (response.status === 200 || response.status === 201) {
-        setNotesList([...response.data.notes]);
+        setNotesList([...response.data.notes].reverse());
       }
     })();
   }, []);

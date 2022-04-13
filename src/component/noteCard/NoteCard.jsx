@@ -15,7 +15,7 @@ import {
   postArchiveRestore,
 } from '../../api-call/api-index';
 
-export const NoteCard = ({ item, archive }) => {
+export const NoteCard = ({ item, archive, label }) => {
   const { _id: id, title, description, color, createdAt } = item;
   const { token } = useToken();
   const { setNotesList } = useNotesList();
@@ -53,7 +53,7 @@ export const NoteCard = ({ item, archive }) => {
     const restoreArchRes = await postArchiveRestore(id, item, token);
     if (restoreArchRes.status === 200 || restoreArchRes.status === 201) {
       setArchivesList([...restoreArchRes.data.archives]);
-      setNotesList([...restoreArchRes.data.notes]);
+      setNotesList([...restoreArchRes.data.notes].reverse());
     }
   };
 
@@ -80,7 +80,7 @@ export const NoteCard = ({ item, archive }) => {
     >
       <div className="card-head">
         <h3 className="card-heading d-flex">
-          {title} <span className="margin-l-5 badge-sm"> {createdAt}</span>
+          {title}
           {Object.keys(item.tags)
             .filter((catKey) => item.tags[catKey])
             .map((badge) => (
@@ -89,32 +89,37 @@ export const NoteCard = ({ item, archive }) => {
               </span>
             ))}
         </h3>
-        <div className="card-content card-description-section">
+        <p className="badge-sm date-text"> {createdAt.slice(0, 10)}</p>
+        <div className="margin-t-5 card-content card-description-section">
           <p>{description}</p>
         </div>
       </div>
-
-      <div className="card-foot note-editing-option">
-        <button
-          className="btn btn-only-icon note-delete"
-          onClick={archive ? handleDeleteArchive : handleDelete}
-        >
-          <span className="fa-solid fa-trash"></span>
-        </button>
-        <button
-          className="btn btn-only-icon note-archive"
-          onClick={archive ? handleArchiveRestore : handleArchive}
-        >
-          <span
-            className={`fa-solid ${archive ? 'fa-box-open' : 'fa-box'} `}
-          ></span>
-        </button>
-        {!archive && (
-          <button className="btn btn-only-icon note-edit" onClick={handleEdit}>
-            <span className="fa-solid fa-pencil"></span>
+      {!label && (
+        <div className="card-foot note-editing-option">
+          <button
+            className="btn btn-only-icon note-delete"
+            onClick={archive ? handleDeleteArchive : handleDelete}
+          >
+            <span className="fa-solid fa-trash"></span>
           </button>
-        )}
-      </div>
+          <button
+            className="btn btn-only-icon note-archive"
+            onClick={archive ? handleArchiveRestore : handleArchive}
+          >
+            <span
+              className={`fa-solid ${archive ? 'fa-box-open' : 'fa-box'} `}
+            ></span>
+          </button>
+          {!archive && (
+            <button
+              className="btn btn-only-icon note-edit"
+              onClick={handleEdit}
+            >
+              <span className="fa-solid fa-pencil"></span>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

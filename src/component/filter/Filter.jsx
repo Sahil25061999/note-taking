@@ -5,7 +5,7 @@ const Filter = () => {
   const { sortByState, tagState, filterDispatch } = useFilter();
 
   const { work, exercise, homework, creative } = tagState;
-  const [visible, setVisi] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   const handleClearBtn = (e) => {
     e.preventDefault();
@@ -24,7 +24,7 @@ const Filter = () => {
   };
 
   const handleChecklist = () => {
-    setVisi(!visible);
+    setVisible(!visible);
   };
 
   const handleSelect = (e) => {
@@ -141,7 +141,6 @@ const Filter = () => {
                 })
               }
               selected={sortByState === 'DATE_ASC' ? true : false}
-              // checked={sortByState === 'DATE_ASC' ? true : false}
               name="sort"
               value="Date ascending"
             >
@@ -155,43 +154,12 @@ const Filter = () => {
                 })
               }
               selected={sortByState === 'DATE_DESC' ? true : false}
-              // checked={sortByState === 'DATE_DESC' ? true : false}
               name="sort"
               value="Date descending"
             >
               Date descending
             </option>
           </select>
-          {/* <label className="margin-b-5">
-              <input
-                onChange={() =>
-                  filterDispatch({
-                    type: 'DATE_ASC',
-                    payload: 'DATE_ASC',
-                  })
-                }
-                checked={sortByState === 'DATE_ASC' ? true : false}
-                type="radio"
-                name="sort"
-                value="Date ascending"
-              />
-              Date ascending
-            </label>
-            <label className="margin-b-5">
-              <input
-                onChange={() =>
-                  filterDispatch({
-                    type: 'DATE_DESC',
-                    payload: 'DATE_DESC',
-                  })
-                }
-                checked={sortByState === 'DATE_DESC' ? true : false}
-                type="radio"
-                name="sort"
-                value="Date descending"
-              />
-              Date descending
-            </label> */}
         </div>
 
         <button

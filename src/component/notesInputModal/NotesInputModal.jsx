@@ -200,7 +200,7 @@ export const NotesInputModal = () => {
               className="btn btn-primary margin-r-10"
               onClick={handleAddNote}
             >
-              Add
+              {editId ? 'Save' : 'Add'}
             </button>
             <div className="color-container">
               <input
