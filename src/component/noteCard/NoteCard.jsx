@@ -8,9 +8,15 @@ import {
   useToken,
   useArchivesList,
 } from '../../context/context-index';
+import {
+  deleteNote,
+  postArchive,
+  deleteArchive,
+  postArchiveRestore,
+} from '../../api-call/api-index';
 
-export const NoteCard = ({ item, archive }) => {
-  const { _id: id, title, description, color } = item;
+export const NoteCard = ({ item, archive, label }) => {
+  const { _id: id, title, description, color, createdAt } = item;
   const { token } = useToken();
   const { setNotesList } = useNotesList();
 
@@ -19,9 +25,7 @@ export const NoteCard = ({ item, archive }) => {
 
   //delete
   const handleDelete = async () => {
-    const deletResponse = await axios.delete(`/api/notes/${id}`, {
-      headers: { authorization: token },
-    });
+    const deletResponse = await deleteNote(id, token);
     if (deletResponse.status === 200 || deletResponse === 201) {
       setNotesList([...deletResponse.data.notes]);
     }
@@ -29,14 +33,7 @@ export const NoteCard = ({ item, archive }) => {
 
   //archive
   const handleArchive = async () => {
-    const archiveResponse = await axios.post(
-      `/api/notes/archives/${id}`,
-      { note: item },
-      {
-        headers: { authorization: token },
-      }
-    );
-
+    const archiveResponse = await postArchive(id, item, token);
     if (archiveResponse.status === 200 || archiveResponse.status === 201) {
       setArchivesList([...archiveResponse.data.archives]);
       setNotesList([...archiveResponse.data.notes]);
@@ -45,101 +42,84 @@ export const NoteCard = ({ item, archive }) => {
 
   //archive delete
   const handleDeleteArchive = async () => {
-    try {
-      const delArchResponse = await axios.delete(`/api/archives/delete/${id}`, {
-        headers: {
-          authorization: token,
-        },
-      });
-      if (delArchResponse.status === 200 || delArchResponse.status === 201) {
-        setArchivesList([...delArchResponse.data.archives]);
-      }
-    } catch (e) {
-      console.error(e);
+    const delArchResponse = await deleteArchive(id, token);
+    if (delArchResponse.status === 200 || delArchResponse.status === 201) {
+      setArchivesList([...delArchResponse.data.archives]);
     }
   };
 
   //restore archive
   const handleArchiveRestore = async () => {
-    try {
-      const restoreArchRes = await axios.post(
-        `/api/archives/restore/${id}`,
-        { archives: item },
-        {
-          headers: { authorization: token },
-        }
-      );
-      if (restoreArchRes.status === 200 || restoreArchRes.status === 201) {
-        setArchivesList([...restoreArchRes.data.archives]);
-        setNotesList([...restoreArchRes.data.notes]);
-      }
-    } catch (e) {
-      console.error(e);
+    const restoreArchRes = await postArchiveRestore(id, item, token);
+    if (restoreArchRes.status === 200 || restoreArchRes.status === 201) {
+      setArchivesList([...restoreArchRes.data.archives]);
+      setNotesList([...restoreArchRes.data.notes].reverse());
     }
   };
 
-  const handleEdit = async () => {};
+  const handleEdit = () => {
+    noteDispatch({
+      type: 'CLEAR_AFTER_ADD',
+      payload: {
+        note: {
+          title: title,
+          description: description,
+          color: color,
+          tags: item.tags,
+        },
+        displayModal: true,
+        editId: id,
+      },
+    });
+  };
 
   return (
     <div
       style={{ backgroundColor: color }}
-      class="card card-only-text note-card"
+      className="card card-only-text note-card"
     >
-      <div class="card-head">
-        <h3 class="card-heading d-flex">
+      <div className="card-head">
+        <h3 className="card-heading d-flex">
           {title}
           {Object.keys(item.tags)
             .filter((catKey) => item.tags[catKey])
             .map((badge) => (
-              <span class="badge-text badge-sm badge-accent">{badge}</span>
+              <span key={badge} className="badge-text badge-sm badge-accent">
+                {badge}
+              </span>
             ))}
         </h3>
-        <div class="card-content card-description-section">
+        <p className="badge-sm date-text"> {createdAt.slice(0, 10)}</p>
+        <div className="margin-t-5 card-content card-description-section">
           <p>{description}</p>
         </div>
       </div>
-
-      <div className="card-foot note-editing-option">
-        {/* {archive ? (
-          <> */}
-        <button
-          className="btn btn-only-icon note-delete"
-          onClick={archive ? handleDeleteArchive : handleDelete}
-        >
-          <span className="fa-solid fa-trash"></span>
-        </button>
-        <button
-          className="btn btn-only-icon note-archive"
-          onClick={archive ? handleArchiveRestore : handleArchive}
-        >
-          <span
-            className={`fa-solid ${archive ? 'fa-box-open' : 'fa-box'} `}
-          ></span>
-        </button>
-        {/* </> */}
-        {/* ) : (
-          <>
-            <button
-              className="btn btn-only-icon note-delete"
-              onClick={handleDelete}
-            >
-              <span className="fa-solid fa-trash"></span>
-            </button>
-            <button
-              className="btn btn-only-icon note-archive"
-              onClick={handleArchive}
-            >
-              <span className="fa-solid fa-box"></span>
-            </button> */}
-        {!archive && (
-          <button className="btn btn-only-icon note-edit" onClick={handleEdit}>
-            <span className="fa-solid fa-pencil"></span>
+      {!label && (
+        <div className="card-foot note-editing-option">
+          <button
+            className="btn btn-only-icon note-delete"
+            onClick={archive ? handleDeleteArchive : handleDelete}
+          >
+            <span className="fa-solid fa-trash"></span>
           </button>
-        )}
-
-        {/* </>
-        )} */}
-      </div>
+          <button
+            className="btn btn-only-icon note-archive"
+            onClick={archive ? handleArchiveRestore : handleArchive}
+          >
+            <span
+              className={`fa-solid ${archive ? 'fa-box-open' : 'fa-box'} `}
+            ></span>
+          </button>
+          {!archive && (
+            <button
+              className="btn btn-only-icon note-edit"
+              onClick={handleEdit}
+            >
+              <span className="fa-solid fa-pencil"></span>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 };

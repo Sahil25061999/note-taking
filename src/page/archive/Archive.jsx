@@ -1,6 +1,6 @@
 import React from 'react';
 import { useArchivesList } from '../../context/context-index';
-
+import Nodata from '../../assets/image/No data-cuate.svg';
 import './Archive.css';
 import { NoteCard } from '../../component/component-index';
 
@@ -15,7 +15,9 @@ export const Archive = () => {
             return <NoteCard key={item._id} item={item} archive={true} />;
           })
         ) : (
-          <h2>No data archived</h2>
+          <div className="empty-list-image">
+            <img src={Nodata} alt="list image" />
+          </div>
         )}
       </main>
     </div>

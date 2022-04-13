@@ -1,35 +1,53 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import {
   AddNoteBtn,
+  Filter,
   NoteCard,
   NotesInputModal,
 } from '../../component/component-index';
-import { useToken, useNotesList } from '../../context/context-index';
+import { useToken, useNotesList, useFilter } from '../../context/context-index';
+import { getTagData, getSortedData } from '../../utilities/utilities-index';
 import './Homepage.css';
+import { getNote } from '../../api-call/api-index';
 
 export const HomePage = () => {
   const { notesList, setNotesList } = useNotesList();
+  const { tagState, sortByState } = useFilter();
   const { token } = useToken();
   useEffect(() => {
     (async () => {
-      const response = await axios.get('/api/notes', {
-        headers: { authorization: token },
-      });
+      const response = await getNote(token);
       if (response.status === 200 || response.status === 201) {
-        setNotesList([...response.data.notes]);
+        setNotesList([...response.data.notes].reverse());
       }
     })();
   }, []);
+
+  const getFilteredData = (cardData, { getTagData, getSortedData }) => {
+    const dataFromTag = getTagData(cardData, tagState);
+
+    const dataFromSort = getSortedData(dataFromTag, sortByState);
+
+    return dataFromSort.length !== 0 ? dataFromSort : undefined;
+  };
+
+  const filteredList = getFilteredData(notesList, {
+    getTagData,
+    getSortedData,
+  });
+
   return (
     <div className="main-page">
       <main>
-        <AddNoteBtn />
+        <div className="d-flex home-head">
+          <Filter />
+          <AddNoteBtn />
+        </div>
         <NotesInputModal />
         <div className="notes-section">
-          {notesList.map((item) => (
-            <NoteCard key={item._id} item={item} />
-          ))}
+          {filteredList &&
+            filteredList.length &&
+            filteredList.map((item) => <NoteCard key={item._id} item={item} />)}
         </div>
       </main>
     </div>

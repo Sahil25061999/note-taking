@@ -13,23 +13,10 @@
   border: transparent;
 }
 .home-navbar {
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   grid-row: 1;
-  /* position: fixed; */
-  /* top: 0; */
-  /* z-index: 99; */
   padding: 8px 5rem;
 }
-
-/* .home-navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--primary-text-color);
-  padding: 1rem 5rem;
-  z-index: 1000;
-  box-shadow: 4px 8px 16px rgba(73, 71, 71, 0.158);
-} */
 
 @media only screen and (max-width: 58.75em) {
   .navbar-icon {

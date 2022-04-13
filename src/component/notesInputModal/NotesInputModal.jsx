@@ -4,54 +4,59 @@ import {
   useNoteInputContext,
   useToken,
 } from '../../context/context-index';
-import axios from 'axios';
 import './NotesInputModal.css';
+import { postNote } from '../../api-call/api-index';
+import { useError } from '../../reducer/useError';
 
 export const NotesInputModal = () => {
   const { note, displayModal, noteDispatch, editId } = useNoteInputContext();
-  const { title, description, color, createdAt } = note;
+  const { title, description, color } = note;
   const { token } = useToken();
-  const { noteList, setNotesList } = useNotesList();
+  const { setNotesList } = useNotesList();
   const { work, exercise, homework, creative } = note.tags;
+  const [{ noteTitleError, noteDescriptionError }, errorDispatch] = useError();
 
   const handleAddNote = async (e) => {
     e.preventDefault();
-    if (title.length === 0 || description.length === 0) {
+    if (title.length === 0) {
+      errorDispatch({
+        type: 'NOTE_TITLE_ERROR',
+        payload: 'please enter a title',
+      });
       return;
     }
-    note.createdAt = new Date();
+    if (description.length === 0) {
+      errorDispatch({
+        type: 'NOTE_DESCRIPTION_ERROR',
+        payload: 'please enter a description',
+      });
+      return;
+    }
+    errorDispatch({ type: 'NOTE_DESCRIPTION_ERROR', payload: '' });
+    errorDispatch({ type: 'NOTE_TITLE_ERROR', payload: '' });
 
-    try {
-      const response = await axios.post(
-        `/api/notes${editId ? `/${editId}` : ''}`,
-        { note },
-        { headers: { authorization: token } }
-      );
-
-      if (response.status === 200 || response.status === 201) {
-        setNotesList([...response.data.notes]);
-        noteDispatch({
-          type: 'CLEAR_AFTER_ADD',
-          payload: {
-            note: {
-              title: '',
-              description: '',
-              color: '#ffffff',
-              tags: {
-                work: false,
-                homework: false,
-                creative: false,
-                exercise: false,
-              },
-              createdAt: '',
+    const noteResponse = await postNote(editId, note, token);
+    if (noteResponse.status === 200 || noteResponse.status === 201) {
+      setNotesList([...noteResponse.data.notes].reverse());
+      noteDispatch({
+        type: 'CLEAR_AFTER_ADD',
+        payload: {
+          note: {
+            title: '',
+            description: '',
+            color: '#ffffff',
+            tags: {
+              work: false,
+              homework: false,
+              creative: false,
+              exercise: false,
             },
-            displayModal: false,
-            editId: '',
+            createdAt: '',
           },
-        });
-      }
-    } catch (e) {
-      console.error(e);
+          displayModal: false,
+          editId: '',
+        },
+      });
     }
   };
 
@@ -91,15 +96,17 @@ export const NotesInputModal = () => {
             <h3 className="text-left modal-title">
               <label htmlFor="title">
                 <strong>Title</strong>
+                <span className="error-msg"> {noteTitleError}</span>
               </label>
             </h3>
             <input
               onChange={(e) =>
                 noteDispatch({ type: 'TITLE', payload: e.target.value })
               }
-              class="textbox modal-input-title"
+              className="textbox modal-input-title"
               id="title"
               type="text"
+              placeholder="Enter a Title"
               value={title}
             />
           </div>
@@ -175,6 +182,7 @@ export const NotesInputModal = () => {
             <h3 className="text-left modal-description">
               <label htmlFor="description">
                 <strong>Description</strong>
+                <span className="error-msg"> {noteDescriptionError}</span>
               </label>
             </h3>
             <textarea
@@ -192,15 +200,19 @@ export const NotesInputModal = () => {
               className="btn btn-primary margin-r-10"
               onClick={handleAddNote}
             >
-              Add
+              {editId ? 'Save' : 'Add'}
             </button>
-            <input
-              onChange={(e) =>
-                noteDispatch({ type: 'COLOR', payload: e.target.value })
-              }
-              type="color"
-              value={color}
-            />
+            <div className="color-container">
+              <input
+                className="color-selector"
+                onChange={(e) =>
+                  noteDispatch({ type: 'COLOR', payload: e.target.value })
+                }
+                type="color"
+                value={color}
+              />
+              <span className="fas fa-palette color-icon"></span>
+            </div>
           </div>
         </form>
       </div>

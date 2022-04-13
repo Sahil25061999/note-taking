@@ -5,14 +5,25 @@
 
 :root {
   --slider-color: rgba(0, 0, 0, 0.418);
-  --wishlist-active: rgb(255, 38, 38);
   --body-font: 'Cabin', sans-serif;
   --head-font: 'Montserrat', sans-serif;
+  --secondary-text-color: rgb(39, 37, 37);
+}
+
+.btn:hover {
+  background-color: var(--hover-color);
+  border-color: var(--hover-color);
 }
 
 body {
   overflow-x: hidden;
   font-family: var(--body-font);
+}
+
+input,
+body,
+textarea {
+  color: var(--secondary-text-color);
 }
 
 h1,
