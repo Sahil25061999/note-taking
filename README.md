@@ -5,10 +5,10 @@ Take note is a note taking app with various functionalities, including colored c
 ## Pages:
 
 - [Homepage](https://spontaneous-eclair-62d02b.netlify.app/)
-- [LabelPage]()
-- [ArchivePage]()
-- [Login]()
-- [Signup]()
+- [LabelPage](https://spontaneous-eclair-62d02b.netlify.app/label)
+- [ArchivePage](https://spontaneous-eclair-62d02b.netlify.app/archive)
+- [Login](https://spontaneous-eclair-62d02b.netlify.app/login)
+- [Signup](https://spontaneous-eclair-62d02b.netlify.app/signup)
 
 ---
 

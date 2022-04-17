@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NoteCard, SideNav } from '../../component/component-index';
 import { useFilter } from '../../context/filter-context';
 import { useNotesList } from '../../context/notes-list-context';
+import Nodata from '../../assets/image/No data-cuate.svg';
 
 export const Label = () => {
   const { tagState } = useFilter();
@@ -28,7 +29,11 @@ export const Label = () => {
         <main>
           {Object.entries(labelList).map(([key, value]) => {
             if (!value.length) {
-              return;
+              return (
+                <div className="empty-list-image">
+                  <img src={Nodata} alt="list image" />
+                </div>
+              );
             }
             return (
               <>
