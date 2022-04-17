@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { NoteCard } from '../../component/component-index';
+import { NoteCard, SideNav } from '../../component/component-index';
 import { useFilter } from '../../context/filter-context';
 import { useNotesList } from '../../context/notes-list-context';
 
@@ -22,26 +22,31 @@ export const Label = () => {
   }, []);
 
   return (
-    <div className="main-page">
-      <main>
-        {Object.entries(labelList).map(([key, value]) => {
-          if (!value.length) {
-            return;
-          }
-          return (
-            <>
-              <h2>{key}</h2>
-              <div>
-                {value.map((item) => {
-                  if (item) {
-                    return <NoteCard key={item._id} item={item} label={true} />;
-                  }
-                })}
-              </div>
-            </>
-          );
-        })}
-      </main>
-    </div>
+    <>
+      <SideNav />
+      <div className="main-page">
+        <main>
+          {Object.entries(labelList).map(([key, value]) => {
+            if (!value.length) {
+              return;
+            }
+            return (
+              <>
+                <h2>{key}</h2>
+                <div>
+                  {value.map((item) => {
+                    if (item) {
+                      return (
+                        <NoteCard key={item._id} item={item} label={true} />
+                      );
+                    }
+                  })}
+                </div>
+              </>
+            );
+          })}
+        </main>
+      </div>
+    </>
   );
 };

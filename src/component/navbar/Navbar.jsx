@@ -32,7 +32,7 @@ export const Navbar = () => {
               <li className="navbar-item">
                 <Link
                   onClick={handleLogout}
-                  to="/logout"
+                  to="/explore"
                   className="btn navbar-link"
                 >
                   Logout

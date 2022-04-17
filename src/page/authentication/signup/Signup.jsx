@@ -85,7 +85,7 @@ export const Signup = () => {
     if (response.status === 201) {
       localStorage.setItem('token', response.data.encodedToken);
       setToken(localStorage.getItem('token'));
-      navigate('/home');
+      navigate('/', { replace: true });
     }
   };
   return (

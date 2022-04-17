@@ -5,3 +5,4 @@ export { SearchBar } from './searchBar/SearchBar';
 export { NotesInputModal } from './notesInputModal/NotesInputModal';
 export { NoteCard } from './noteCard/NoteCard';
 export { Filter } from './filter/Filter';
+export { RequiresAuth } from './requireAuth/RequiresAuth';
