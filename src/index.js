@@ -10,6 +10,7 @@ import {
   ArchivesListProvider,
   NoteInputProvider,
   FilterProvider,
+  DeleteListProvider,
 } from './context/context-index';
 
 // Call make Server
@@ -20,13 +21,15 @@ ReactDOM.render(
     <Router>
       <TokenProvider>
         <FilterProvider>
-          <ArchivesListProvider>
-            <NotesListProvider>
-              <NoteInputProvider>
-                <App />
-              </NoteInputProvider>
-            </NotesListProvider>
-          </ArchivesListProvider>
+          <DeleteListProvider>
+            <ArchivesListProvider>
+              <NotesListProvider>
+                <NoteInputProvider>
+                  <App />
+                </NoteInputProvider>
+              </NotesListProvider>
+            </ArchivesListProvider>
+          </DeleteListProvider>
         </FilterProvider>
       </TokenProvider>
     </Router>

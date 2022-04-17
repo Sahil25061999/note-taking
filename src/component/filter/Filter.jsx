@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useFilter } from '../../context/context-index';
 import './Filter.css';
 const Filter = () => {
-  const { sortByState, tagState, filterDispatch } = useFilter();
+  const { sortByState, priorityState, tagState, filterDispatch } = useFilter();
 
   const { work, exercise, homework, creative } = tagState;
-  const [visible, setVisible] = useState(false);
+  const [checklist_visible, setVisible] = useState(false);
 
   const handleClearBtn = (e) => {
     e.preventDefault();
@@ -13,6 +13,7 @@ const Filter = () => {
       type: 'CLEAR',
       payload: {
         sortByState: null,
+        priorityState: null,
         tagState: {
           work: false,
           homework: false,
@@ -24,7 +25,7 @@ const Filter = () => {
   };
 
   const handleChecklist = () => {
-    setVisible(!visible);
+    setVisible(!checklist_visible);
   };
 
   const handleSelect = (e) => {
@@ -46,6 +47,20 @@ const Filter = () => {
     }
   };
 
+  const handlePrioritySelect = ({ target: { value: priority } }) => {
+    switch (priority) {
+      case 'priority_low':
+        return filterDispatch({ type: 'PRIORITY_LOW_FILTER' });
+
+      case 'priority_medium':
+        return filterDispatch({ type: 'PRIORITY_MEDIUM_FILTER' });
+      case 'priority_high':
+        return filterDispatch({ type: 'PRIORITY_HIGH_FILTER' });
+      default:
+        return;
+    }
+  };
+
   return (
     <aside className="filter-section">
       <form className="filter-container" action="">
@@ -53,7 +68,9 @@ const Filter = () => {
           <p>Tags</p>
           <div className="checklist-container filter-input-element">
             <span
-              className={`checklist-title ${visible ? 'visible' : ''}`}
+              className={`checklist-title ${
+                checklist_visible ? 'visible' : ''
+              }`}
               onClick={handleChecklist}
             >
               Tags
@@ -130,7 +147,7 @@ const Filter = () => {
             className="select-input filter-input-element"
             onChange={handleSelect}
           >
-            <option disabled selected value>
+            <option disabled selected={sortByState ? false : true} value>
               --select option--
             </option>
             <option
@@ -158,6 +175,54 @@ const Filter = () => {
               value="Date descending"
             >
               Date descending
+            </option>
+          </select>
+        </div>
+        <div className="filter-elements filter-priority-element">
+          <p>Priority</p>
+
+          <select
+            className="select-input filter-input-element"
+            onChange={handlePrioritySelect}
+          >
+            <option disabled selected={priorityState ? false : true} value>
+              --select option--
+            </option>
+            <option
+              onChange={() =>
+                filterDispatch({
+                  type: 'PRIORITY_LOW_FILTER',
+                })
+              }
+              selected={priorityState === 'PRIORITY_LOW' ? true : false}
+              name="priority"
+              value="priority_low"
+            >
+              Low
+            </option>
+            <option
+              onChange={() =>
+                filterDispatch({
+                  type: 'PRIORITY_MEDIUM_FILTER',
+                })
+              }
+              selected={priorityState === 'PRIORITY_MEDIUM' ? true : false}
+              name="priority"
+              value="priority_medium"
+            >
+              Medium
+            </option>
+            <option
+              onChange={() =>
+                filterDispatch({
+                  type: 'PRIORITY_HIGH_FILTER',
+                })
+              }
+              selected={priorityState === 'PRIORITY_HIGH' ? true : false}
+              name="priority"
+              value="priority_high"
+            >
+              high
             </option>
           </select>
         </div>

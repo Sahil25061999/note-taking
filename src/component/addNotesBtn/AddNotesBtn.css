@@ -7,9 +7,10 @@
   margin-bottom: 1rem;
   cursor: pointer;
   background-color: var(--secondary-text-color);
-}
-
-.add-button-icon {
   font-size: 4rem;
   color: var(--primary-text-color);
+}
+
+.add-button:hover {
+  box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.08);
 }

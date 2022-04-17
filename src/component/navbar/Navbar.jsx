@@ -8,8 +8,6 @@ export const Navbar = () => {
   const { token, setToken } = useToken();
   const handleLogout = () => {
     setToken(localStorage.clear());
-    setCartData([]);
-    setWishlistData([]);
   };
   return (
     <>

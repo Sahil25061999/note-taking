@@ -4,3 +4,4 @@ export { HomePage } from './homepage/Homepage';
 export { Archive } from './archive/Archive';
 export { Label } from './label/Label';
 export { Logout } from './authentication/logout/Logout';
+export { Delete } from './delete/Delete';

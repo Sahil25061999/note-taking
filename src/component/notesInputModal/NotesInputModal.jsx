@@ -10,7 +10,7 @@ import { useError } from '../../reducer/useError';
 
 export const NotesInputModal = () => {
   const { note, displayModal, noteDispatch, editId } = useNoteInputContext();
-  const { title, description, color } = note;
+  const { title, description, color, priority } = note;
   const { token } = useToken();
   const { setNotesList } = useNotesList();
   const { work, exercise, homework, creative } = note.tags;
@@ -45,6 +45,7 @@ export const NotesInputModal = () => {
             title: '',
             description: '',
             color: '#ffffff',
+            priority: 'PRIORITY_LOW',
             tags: {
               work: false,
               homework: false,
@@ -60,6 +61,21 @@ export const NotesInputModal = () => {
     }
   };
 
+  const handlePriorityChange = ({ target: { value: priority_option } }) => {
+    switch (priority_option) {
+      case 'PRIORITY_MEDIUM':
+        console.log('med called');
+        return noteDispatch({ type: 'PRIORITY_MEDIUM' });
+
+      case 'PRIORITY_HIGH':
+        return noteDispatch({ type: 'PRIORITY_HIGH' });
+      case 'PRIORITY_LOW':
+      default:
+        console.log('called');
+        return noteDispatch({ type: 'PRIORITY_LOW' });
+    }
+  };
+
   return displayModal ? (
     <div className="modal-container notes-modal-container">
       <div className="modal shadow notes-modal ">
@@ -72,6 +88,7 @@ export const NotesInputModal = () => {
                   title: '',
                   description: '',
                   color: '#ffffff',
+                  priority: 'PRIORITY_LOW',
                   tags: {
                     work: false,
                     homework: false,
@@ -84,6 +101,8 @@ export const NotesInputModal = () => {
                 editId: '',
               },
             });
+            errorDispatch({ type: 'NOTE_DESCRIPTION_ERROR', payload: '' });
+            errorDispatch({ type: 'NOTE_TITLE_ERROR', payload: '' });
           }}
           className="btn btn-float close"
         >
@@ -92,23 +111,42 @@ export const NotesInputModal = () => {
 
         <form className="modal-form" onClick={(e) => e.stopPropagation()}>
           {/*                   TITLE BOX                           */}
-          <div className="form-content">
-            <h3 className="text-left modal-title">
-              <label htmlFor="title">
-                <strong>Title</strong>
-                <span className="error-msg"> {noteTitleError}</span>
-              </label>
-            </h3>
-            <input
-              onChange={(e) =>
-                noteDispatch({ type: 'TITLE', payload: e.target.value })
-              }
-              className="textbox modal-input-title"
-              id="title"
-              type="text"
-              placeholder="Enter a Title"
-              value={title}
-            />
+          <div className=" form-head form-content">
+            <div className="form-content">
+              <h3 className="text-left modal-title">
+                <label htmlFor="title">
+                  <strong>Title</strong>
+                  <span className="error-msg"> {noteTitleError}</span>
+                </label>
+              </h3>
+              <input
+                onChange={(e) =>
+                  noteDispatch({ type: 'TITLE', payload: e.target.value })
+                }
+                className="textbox modal-input-title"
+                id="title"
+                type="text"
+                placeholder="Enter a Title"
+                value={title}
+              />
+            </div>
+            {/*                   PRIORITY SECTION              */}
+            <div className="form-content priority-section">
+              <h3 className="text-left modal-title modal-title-priority">
+                <label htmlFor="priority">
+                  <strong>Priority</strong>
+                </label>
+              </h3>
+              <select
+                className="textbox priority-input"
+                onChange={handlePriorityChange}
+                value={priority}
+              >
+                <option value="PRIORITY_LOW">Low</option>
+                <option value="PRIORITY_MEDIUM">Medium</option>
+                <option value="PRIORITY_HIGH">High</option>
+              </select>
+            </div>
           </div>
 
           {/*                   Tags                           */}

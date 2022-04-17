@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
+
 import './NoteCard.css';
 
 import {
@@ -7,6 +7,7 @@ import {
   useNotesList,
   useToken,
   useArchivesList,
+  useDeleteList,
 } from '../../context/context-index';
 import {
   deleteNote,
@@ -16,18 +17,19 @@ import {
 } from '../../api-call/api-index';
 
 export const NoteCard = ({ item, archive, label }) => {
-  const { _id: id, title, description, color, createdAt } = item;
+  const { _id: id, title, description, color, priority, createdAt } = item;
   const { token } = useToken();
   const { setNotesList } = useNotesList();
-
-  const { note, displayModal, noteDispatch } = useNoteInputContext();
-  const { archivesList, setArchivesList } = useArchivesList();
+  const { deleteList, setDeleteList } = useDeleteList();
+  const { noteDispatch } = useNoteInputContext();
+  const { setArchivesList } = useArchivesList();
 
   //delete
   const handleDelete = async () => {
     const deletResponse = await deleteNote(id, token);
     if (deletResponse.status === 200 || deletResponse === 201) {
       setNotesList([...deletResponse.data.notes]);
+      setDeleteList([...deleteList, item]);
     }
   };
 
@@ -65,6 +67,7 @@ export const NoteCard = ({ item, archive, label }) => {
           title: title,
           description: description,
           color: color,
+          priority: priority,
           tags: item.tags,
         },
         displayModal: true,
@@ -73,23 +76,32 @@ export const NoteCard = ({ item, archive, label }) => {
     });
   };
 
+  useEffect(() => {
+    localStorage.setItem('deleted_items', JSON.stringify(deleteList));
+  }, [deleteList]);
+
   return (
     <div
       style={{ backgroundColor: color }}
       className="card card-only-text note-card"
     >
       <div className="card-head">
-        <h3 className="card-heading d-flex">
-          {title}
-          {Object.keys(item.tags)
-            .filter((catKey) => item.tags[catKey])
-            .map((badge) => (
-              <span key={badge} className="badge-text badge-sm badge-accent">
-                {badge}
-              </span>
-            ))}
-        </h3>
-        <p className="badge-sm date-text"> {createdAt.slice(0, 10)}</p>
+        <div className="card-heading d-flex">
+          <h3>{title}</h3>
+          <div className="badge-container">
+            {Object.keys(item.tags)
+              .filter((catKey) => item.tags[catKey])
+              .map((badge) => (
+                <span key={badge} className="badge-text badge-sm badge-accent">
+                  {badge.toUpperCase()}
+                </span>
+              ))}
+            <span className="badge-text badge-sm badge-secondary">
+              {priority.slice(9)}
+            </span>
+          </div>
+        </div>
+        <p className="badge-sm date-text"> {createdAt.slice(0, 10)} </p>
         <div className="margin-t-5 card-content card-description-section">
           <p>{description}</p>
         </div>
