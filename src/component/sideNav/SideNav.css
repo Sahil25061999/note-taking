@@ -9,6 +9,7 @@
 
 .btn-link:hover {
   text-decoration: none;
+  border-radius: 0.75rem;
 }
 
 .sidebar-items {
@@ -17,7 +18,7 @@
 
 .sidebar-items.active {
   background-color: var(--secondary-text-color);
-
+  border-radius: 0.75rem;
   color: var(--primary-text-color);
   border-color: var(--secondary-text-color);
 }

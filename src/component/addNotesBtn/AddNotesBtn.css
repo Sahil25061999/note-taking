@@ -1,8 +1,8 @@
 .add-button {
   order: -1;
   height: 12rem;
-  width: 15rem;
-  border-radius: 0.5rem;
+  width: 13rem;
+  border-radius: 1rem;
   border: none;
   margin-bottom: 1rem;
   cursor: pointer;

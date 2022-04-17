@@ -71,7 +71,6 @@ export const NotesInputModal = () => {
         return noteDispatch({ type: 'PRIORITY_HIGH' });
       case 'PRIORITY_LOW':
       default:
-        console.log('called');
         return noteDispatch({ type: 'PRIORITY_LOW' });
     }
   };
