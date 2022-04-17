@@ -4,10 +4,11 @@ import { useState, useEffect } from 'react';
 const TokenContext = createContext(null);
 
 const TokenProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState();
 
   useEffect(() => {
-    setToken(localStorage.getItem('token'));
+    const tokenFromLocal = localStorage.getItem('token');
+    setToken(tokenFromLocal);
   }, []);
 
   return (

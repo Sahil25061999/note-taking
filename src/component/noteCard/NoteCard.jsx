@@ -39,7 +39,7 @@ export const NoteCard = ({ item, archive, label }) => {
     const archiveResponse = await postArchive(id, item, token);
     if (archiveResponse.status === 200 || archiveResponse.status === 201) {
       setArchivesList([...archiveResponse.data.archives]);
-      setNotesList([...archiveResponse.data.notes]);
+      setNotesList([...archiveResponse.data.notes].reverse());
     }
   };
 

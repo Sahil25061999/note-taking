@@ -1,0 +1,54 @@
+.explore-page {
+  width: 100%;
+  min-height: 100vh;
+  padding-bottom: 0;
+  grid-column: 1 / span 2;
+  grid-row: 2 / span 3;
+  margin: 0;
+  padding-left: 5rem;
+  line-height: 3rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.explore-page div {
+  order: -1;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.explore-page::before {
+  content: '';
+  position: absolute;
+  background-position: center right;
+  height: 100%;
+  width: 100%;
+  background-image: url('../../assets/image/explore.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+@media only screen and (max-width: 1200px) {
+  .explore-page {
+    justify-content: center;
+
+    padding: 0;
+  }
+  .explore-page div {
+    text-align: center;
+    mix-blend-mode: luminosity;
+  }
+
+  .explore-page div p {
+    backdrop-filter: blur(25px);
+  }
+  .explore-page::before {
+    transform: rotate(90deg);
+    background-image: url('../../assets/image/explore.png');
+    background-position: center;
+    background-size: contain;
+    bottom: -10%;
+  }
+}

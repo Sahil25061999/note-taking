@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../Authentication.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useToken } from '../../../context/context-index';
 import { postLogin } from '../../../api-call/api-index';
 import { useError } from '../../../reducer/useError';
@@ -13,10 +13,9 @@ export const Login = () => {
   const [error, errorDispatch] = useError();
   const { emailError, passwordError } = error;
   const [showPassword, setShowPassword] = useState(false);
-  // const { setCartData } = useCart();
-  // const { setWishlistData } = useWishlist();
-  const { setToken } = useToken();
+  const { token, setToken } = useToken();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -38,10 +37,15 @@ export const Login = () => {
     if (response.data.encodedToken) {
       localStorage.setItem('token', response.data.encodedToken);
       setToken(localStorage.getItem('token'));
-
-      navigate('/');
+      navigate(location.state?.from?.pathname || '/', { replace: true });
     }
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate('/', { replace: true });
+    }
+  }, []);
 
   return (
     <main className="authentication-body">
