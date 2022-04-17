@@ -43,7 +43,7 @@ h6 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--primary-text-color);
+  background-color: var(--secondary-text-color);
   border-radius: 2rem;
 }
 ::-webkit-scrollbar-thumb:hover {
