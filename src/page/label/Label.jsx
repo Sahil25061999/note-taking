@@ -29,11 +29,7 @@ export const Label = () => {
         <main>
           {Object.entries(labelList).map(([key, value]) => {
             if (!value.length) {
-              return (
-                <div className="empty-list-image">
-                  <img src={Nodata} alt="list image" />
-                </div>
-              );
+              return;
             }
             return (
               <>

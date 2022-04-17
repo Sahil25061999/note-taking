@@ -53,8 +53,7 @@ export const HomePage = () => {
           </div>
           <NotesInputModal />
           <div className="notes-section">
-            {filteredList &&
-              filteredList.length &&
+            {filteredList?.length &&
               filteredList.map((item) => (
                 <NoteCard key={item._id} item={item} />
               ))}

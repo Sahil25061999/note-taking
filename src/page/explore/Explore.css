@@ -1,6 +1,6 @@
 .explore-page {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   padding-bottom: 0;
   grid-column: 1 / span 2;
   grid-row: 2 / span 3;
@@ -49,5 +49,6 @@
     background-image: url('../../assets/image/explore.png');
     background-position: center;
     background-size: contain;
+    bottom: -10%;
   }
 }

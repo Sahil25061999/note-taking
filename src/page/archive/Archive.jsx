@@ -18,7 +18,7 @@ export const Archive = () => {
             })
           ) : (
             <div className="empty-list-image">
-              <img src={Nodata} alt="list image" />
+              <img src={Nodata} alt="list" />
             </div>
           )}
         </main>
