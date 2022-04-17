@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import {
   useToken,
   useDeleteList,
@@ -12,10 +12,12 @@ export const Navbar = () => {
   const { token, setToken } = useToken();
   const { setDeleteList } = useDeleteList();
   const { setArchiveList } = useArchivesList();
+  const navigate = useNavigate();
   const handleLogout = () => {
     setToken(localStorage.clear());
     setDeleteList([]);
     setArchiveList([]);
+    navigate('/explore', { replace: true });
   };
   return (
     <>
