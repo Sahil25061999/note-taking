@@ -5,3 +5,4 @@ export { Archive } from './archive/Archive';
 export { Label } from './label/Label';
 export { Logout } from './authentication/logout/Logout';
 export { Delete } from './delete/Delete';
+export { Explore } from './explore/Explore';

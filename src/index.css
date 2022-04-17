@@ -15,6 +15,15 @@
   border-color: var(--hover-color);
 }
 
+.btn-black {
+  background-color: var(--secondary-text-color);
+  border-color: var(--secondary-text-color);
+}
+
+.btn-black:hover {
+  color: var(--primary-text-color);
+}
+
 body {
   overflow-x: hidden;
   font-family: var(--body-font);

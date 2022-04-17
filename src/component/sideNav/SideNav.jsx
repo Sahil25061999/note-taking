@@ -9,7 +9,7 @@ export const SideNav = () => {
   const archiveLength = archivesList.length;
   return (
     <nav className="sidebar">
-      <NavLink to="/" className="btn btn-link sidebar-items">
+      <NavLink to="/home" className="btn btn-link sidebar-items">
         <span className="fa-solid fa-house"></span>{' '}
         <span className="sidebar-link-text">Home</span>
       </NavLink>

@@ -13,8 +13,6 @@ export const Login = () => {
   const [error, errorDispatch] = useError();
   const { emailError, passwordError } = error;
   const [showPassword, setShowPassword] = useState(false);
-  // const { setCartData } = useCart();
-  // const { setWishlistData } = useWishlist();
   const { setToken } = useToken();
   const navigate = useNavigate();
 
@@ -39,7 +37,7 @@ export const Login = () => {
       localStorage.setItem('token', response.data.encodedToken);
       setToken(localStorage.getItem('token'));
 
-      navigate('/');
+      navigate('/home');
     }
   };
 
