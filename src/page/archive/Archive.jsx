@@ -1,11 +1,21 @@
-import React from 'react';
-import { useArchivesList } from '../../context/context-index';
+import React, { useEffect } from 'react';
+import { useArchivesList, useToken } from '../../context/context-index';
 import Nodata from '../../assets/image/No data-cuate.svg';
 import './Archive.css';
 import { NoteCard } from '../../component/component-index';
-
+import { getArchive } from '../../api-call/api-index';
 export const Archive = () => {
   const { archivesList } = useArchivesList();
+  const { token } = useToken();
+  useEffect(() => {
+    (async () => {
+      console.log('called');
+      const archiveResponse = await getArchive(token);
+      if (archiveResponse) {
+        setArchivesList(archiveResponse);
+      }
+    })();
+  }, []);
 
   return (
     <div className="main-page">

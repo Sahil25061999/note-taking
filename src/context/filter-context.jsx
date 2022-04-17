@@ -48,25 +48,39 @@ const FilterProvider = ({ children }) => {
       case 'DATE_DESC':
         return { ...state, sortByState: action.payload };
 
+      /*                Priortiy Filter                              */
+
+      case 'PRIORITY_LOW_FILTER':
+        return { ...state, priorityState: 'PRIORITY_LOW' };
+      case 'PRIORITY_MEDIUM_FILTER':
+        return { ...state, priorityState: 'PRIORITY_MEDIUM' };
+      case 'PRIORITY_HIGH_FILTER':
+        return { ...state, priorityState: 'PRIORITY_HIGH' };
+
       default:
         return state;
     }
   };
 
-  const [{ sortByState, tagState }, filterDispatch] = useReducer(reducerFunc, {
-    sortByState: null,
-    tagState: {
-      work: false,
-      homework: false,
-      exercise: false,
-      creative: false,
-    },
-  });
+  const [{ sortByState, priorityState, tagState }, filterDispatch] = useReducer(
+    reducerFunc,
+    {
+      sortByState: null,
+      priorityState: null,
+      tagState: {
+        work: false,
+        homework: false,
+        exercise: false,
+        creative: false,
+      },
+    }
+  );
 
   return (
     <FilterContext.Provider
       value={{
         sortByState,
+        priorityState,
         tagState,
         filterDispatch,
       }}

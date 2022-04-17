@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   AddNoteBtn,
   Filter,
@@ -6,13 +6,17 @@ import {
   NotesInputModal,
 } from '../../component/component-index';
 import { useToken, useNotesList, useFilter } from '../../context/context-index';
-import { getTagData, getSortedData } from '../../utilities/utilities-index';
+import {
+  getTagData,
+  getSortedData,
+  getPriorityData,
+} from '../../utilities/utilities-index';
 import './Homepage.css';
 import { getNote } from '../../api-call/api-index';
 
 export const HomePage = () => {
   const { notesList, setNotesList } = useNotesList();
-  const { tagState, sortByState } = useFilter();
+  const { tagState, priorityState, sortByState } = useFilter();
   const { token } = useToken();
   useEffect(() => {
     (async () => {
@@ -25,8 +29,9 @@ export const HomePage = () => {
 
   const getFilteredData = (cardData, { getTagData, getSortedData }) => {
     const dataFromTag = getTagData(cardData, tagState);
+    const dataFromPriority = getPriorityData(dataFromTag, priorityState);
 
-    const dataFromSort = getSortedData(dataFromTag, sortByState);
+    const dataFromSort = getSortedData(dataFromPriority, sortByState);
 
     return dataFromSort.length !== 0 ? dataFromSort : undefined;
   };

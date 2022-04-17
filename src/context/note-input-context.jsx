@@ -10,6 +10,8 @@ const reducerFunc = (state, action) => {
       return { ...state, note: { ...state.note, description: action.payload } };
     case 'COLOR':
       return { ...state, note: { ...state.note, color: action.payload } };
+
+    /*                       CATEGORIES                            */
     case 'WORK':
       return {
         ...state,
@@ -42,6 +44,34 @@ const reducerFunc = (state, action) => {
           tags: { ...state.note.tags, exercise: !state.note.tags.exercise },
         },
       };
+
+    /*                          PRIORITY                              */
+
+    case 'PRIORITY_LOW':
+      return {
+        ...state,
+        note: {
+          ...state.note,
+          priority: 'PRIORITY_LOW',
+        },
+      };
+    case 'PRIORITY_MEDIUM':
+      return {
+        ...state,
+        note: {
+          ...state.note,
+          priority: 'PRIORITY_MEDIUM',
+        },
+      };
+    case 'PRIORITY_HIGH':
+      return {
+        ...state,
+        note: {
+          ...state.note,
+          priority: 'PRIORITY_HIGH',
+        },
+      };
+
     case 'DISPLAY_MODAL':
       return { ...state, displayModal: action.payload };
     case 'CLEAR_AFTER_ADD':
@@ -60,6 +90,7 @@ export const NoteInputProvider = ({ children }) => {
         title: '',
         description: '',
         color: '#ffffff',
+        priority: 'PRIORITY_LOW',
         tags: {
           work: false,
           homework: false,
@@ -72,6 +103,7 @@ export const NoteInputProvider = ({ children }) => {
       editId: '',
     }
   );
+
   return (
     <NoteInputContext.Provider
       value={{ note, displayModal, noteDispatch, editId }}

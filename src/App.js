@@ -8,18 +8,24 @@ import {
   Logout,
   Archive,
   Label,
+  Delete,
 } from './page/page-index';
+import { useToken } from './context/token-context';
 
 function App() {
+  const { token } = useToken();
   return (
     <div className="App">
       <Navbar />
       <div className="body">
-        <SideNav />
+        {token ? <SideNav /> : ''}
+
         <Routes>
           <Route path="/logout" element={<Logout />} />
+
           <Route path="/label" element={<Label />} />
           <Route path="/archive" element={<Archive />} />
+          <Route path="/trash" element={<Delete />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<HomePage />} />

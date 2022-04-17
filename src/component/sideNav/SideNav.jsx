@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { useArchivesList } from '../../context/context-index';
+import { useArchivesList, useDeleteList } from '../../context/context-index';
 import './SideNav.css';
 
 export const SideNav = () => {
   const { archivesList } = useArchivesList();
+  const { deleteList } = useDeleteList();
   const archiveLength = archivesList.length;
   return (
     <nav className="sidebar">
@@ -21,13 +22,20 @@ export const SideNav = () => {
         <span className="sidebar-link-text">
           Archive
           {archiveLength !== 0 && (
-            <span className=" badge-text">{archiveLength}</span>
+            <span className=" badge-text badge-notify">{archiveLength}</span>
           )}
         </span>
       </NavLink>
       <NavLink to="/trash" className="btn btn-link sidebar-items">
         <span className="fa-solid fa-trash"></span>{' '}
-        <span className="sidebar-link-text">Trash</span>
+        <span className="sidebar-link-text">
+          Trash
+          {deleteList.length !== 0 && (
+            <span className=" badge-text badge-notify">
+              {deleteList.length}
+            </span>
+          )}
+        </span>
       </NavLink>
       <NavLink to="/profile" className="btn btn-link sidebar-items">
         <span className="fa-solid fa-user"></span>

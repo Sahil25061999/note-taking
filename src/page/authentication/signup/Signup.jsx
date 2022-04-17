@@ -13,15 +13,28 @@ export const Signup = () => {
     confirmPassword: '',
   });
   const { setToken } = useToken();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState({
+    passwordShow: false,
+    confirmPasswordShow: false,
+  });
   const navigate = useNavigate();
 
   const [error, errorDispatch] = useError();
 
   const { emailError, passwordError, confirmPasswordError } = error;
 
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
+  const handleShowPassword = ({ target: { id } }) => {
+    if (id === 'password-show')
+      setShowPassword({
+        ...showPassword,
+        passwordShow: !showPassword.passwordShow,
+      });
+    if (id === 'confirm-password-show') {
+      setShowPassword({
+        ...showPassword,
+        confirmPasswordShow: !showPassword.confirmPasswordShow,
+      });
+    }
   };
 
   const handleEmail = (e) => {
@@ -95,6 +108,7 @@ export const Signup = () => {
               Email<span className="error-msg"> {emailError}</span>
             </label>
             <input
+              placeholder="something@something.com"
               onChange={handleEmail}
               id="email"
               className="textbox"
@@ -108,15 +122,17 @@ export const Signup = () => {
             </label>
             <input
               onChange={handlePassword}
+              placeholder="must contain letters and numbers"
               id="password"
               className="textbox"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword.passwordShow ? 'text' : 'password'}
               required
             />
             <span
+              id="password-show"
               onClick={handleShowPassword}
               className={`fa-solid ${
-                showPassword ? 'fa-eye' : 'fa-eye-slash'
+                showPassword.passwordShow ? 'fa-eye' : 'fa-eye-slash'
               } password-eye-icon`}
             ></span>
           </div>
@@ -128,10 +144,16 @@ export const Signup = () => {
             <input
               id="confirm-password"
               className="textbox"
-              type="password"
+              type={showPassword.confirmPasswordShow ? 'text' : 'password'}
               onChange={handleConfirmPassword}
             />
-            <span className="fa-solid fa-eye password-eye-icon confirm-password-eye"></span>
+            <span
+              onClick={handleShowPassword}
+              id="confirm-password-show"
+              className={`fa-solid ${
+                showPassword.confirmPasswordShow ? 'fa-eye' : 'fa-eye-slash'
+              } password-eye-icon confirm-password-eye`}
+            ></span>
           </div>
           <div className="input-container remember-me-container">
             <div>
