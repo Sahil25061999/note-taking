@@ -4,10 +4,13 @@ const DeleteList = createContext();
 
 export const DeleteListProvider = ({ children }) => {
   const [deleteList, setDeleteList] = useState([]);
-  const deleteListFromLocal = localStorage.getItem('deleted_items');
 
   useEffect(() => {
-    setDeleteList(JSON.parse(deleteListFromLocal));
+    const deleteListFromLocal = localStorage.getItem('deleted_items');
+
+    if (deleteListFromLocal) {
+      setDeleteList(JSON.parse(deleteListFromLocal));
+    }
   }, []);
   return (
     <DeleteList.Provider value={{ setDeleteList, deleteList }}>

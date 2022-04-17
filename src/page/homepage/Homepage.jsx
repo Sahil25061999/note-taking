@@ -21,7 +21,6 @@ export const HomePage = () => {
   useEffect(() => {
     (async () => {
       const response = await getNote(token);
-      console.log(response.data.notes, token);
       if (response.status === 200 || response.status === 201) {
         setNotesList([...response.data.notes].reverse());
       }

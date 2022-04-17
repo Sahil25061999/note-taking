@@ -41,6 +41,12 @@
   font-weight: bold;
 }
 
+.empty-list-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 main {
   margin-top: 1.5rem;
 }

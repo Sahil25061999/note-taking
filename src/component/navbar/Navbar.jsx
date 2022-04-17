@@ -1,13 +1,21 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { useToken } from '../../context/context-index';
+import {
+  useToken,
+  useDeleteList,
+  useArchivesList,
+} from '../../context/context-index';
 import { SearchBar } from '../component-index';
 import './Navbar.css';
 
 export const Navbar = () => {
   const { token, setToken } = useToken();
+  const { setDeleteList } = useDeleteList();
+  const { setArchiveList } = useArchivesList();
   const handleLogout = () => {
     setToken(localStorage.clear());
+    setDeleteList([]);
+    setArchiveList([]);
   };
   return (
     <>

@@ -147,16 +147,10 @@ const Filter = () => {
             className="select-input filter-input-element"
             onChange={handleSelect}
           >
-            <option disabled selected={sortByState ? false : true} value>
+            <option disabled selected={sortByState ? false : true}>
               --select option--
             </option>
             <option
-              onChange={() =>
-                filterDispatch({
-                  type: 'DATE_ASC',
-                  payload: 'DATE_ASC',
-                })
-              }
               selected={sortByState === 'DATE_ASC' ? true : false}
               name="sort"
               value="Date ascending"
@@ -164,12 +158,6 @@ const Filter = () => {
               Date ascending
             </option>
             <option
-              onChange={() =>
-                filterDispatch({
-                  type: 'DATE_DESC',
-                  payload: 'DATE_DESC',
-                })
-              }
               selected={sortByState === 'DATE_DESC' ? true : false}
               name="sort"
               value="Date descending"
@@ -185,15 +173,10 @@ const Filter = () => {
             className="select-input filter-input-element"
             onChange={handlePrioritySelect}
           >
-            <option disabled selected={priorityState ? false : true} value>
+            <option disabled selected={priorityState ? false : true}>
               --select option--
             </option>
             <option
-              onChange={() =>
-                filterDispatch({
-                  type: 'PRIORITY_LOW_FILTER',
-                })
-              }
               selected={priorityState === 'PRIORITY_LOW' ? true : false}
               name="priority"
               value="priority_low"
@@ -201,11 +184,6 @@ const Filter = () => {
               Low
             </option>
             <option
-              onChange={() =>
-                filterDispatch({
-                  type: 'PRIORITY_MEDIUM_FILTER',
-                })
-              }
               selected={priorityState === 'PRIORITY_MEDIUM' ? true : false}
               name="priority"
               value="priority_medium"
@@ -213,11 +191,6 @@ const Filter = () => {
               Medium
             </option>
             <option
-              onChange={() =>
-                filterDispatch({
-                  type: 'PRIORITY_HIGH_FILTER',
-                })
-              }
               selected={priorityState === 'PRIORITY_HIGH' ? true : false}
               name="priority"
               value="priority_high"

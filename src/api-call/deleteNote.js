@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const deleteNote = async (id, token) => {
   try {
-    const response = await await axios.delete(`/api/notes/${id}`, {
+    const response = await axios.delete(`/api/notes/${id}`, {
       headers: { authorization: token },
     });
     return response;

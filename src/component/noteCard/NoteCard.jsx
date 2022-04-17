@@ -29,6 +29,7 @@ export const NoteCard = ({ item, archive, label }) => {
     const deletResponse = await deleteNote(id, token);
     if (deletResponse.status === 200 || deletResponse === 201) {
       setNotesList([...deletResponse.data.notes]);
+
       setDeleteList([...deleteList, item]);
     }
   };
@@ -47,6 +48,7 @@ export const NoteCard = ({ item, archive, label }) => {
     const delArchResponse = await deleteArchive(id, token);
     if (delArchResponse.status === 200 || delArchResponse.status === 201) {
       setArchivesList([...delArchResponse.data.archives]);
+      setDeleteList([...deleteList, item]);
     }
   };
 

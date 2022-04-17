@@ -6,3 +6,4 @@ export { deleteArchive } from './deleteArchive';
 export { postArchiveRestore } from './postArchiveRestore';
 export { postNote } from './postNote';
 export { getNote } from './getNote';
+export { getArchive } from './getArchive';
