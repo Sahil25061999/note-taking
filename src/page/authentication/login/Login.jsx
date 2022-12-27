@@ -95,24 +95,12 @@ export const Login = () => {
             </span>
           </div>
           <button
-            className="btn btn-primary form-log-in-btn"
+            className="btn btn-primary form-log-in-btn authenticate-btn"
             onClick={handleLogin}
           >
             Log In
           </button>
 
-          <p className="form-or-text">
-            <span className="line"></span>Or<span className="line"></span>
-          </p>
-
-          <div className="form-default-mail-container">
-            <button className="btn btn-with-icon google-btn btn-black">
-              <span>
-                <span className="fa-brands fa-google btn-icon"></span> Log in
-                using google
-              </span>
-            </button>
-          </div>
           <p className="small-text no-account-condition text-center muted-text-color">
             Don't have an account ?
             <Link

@@ -164,7 +164,7 @@ export const Signup = () => {
             </div>
           </div>
           <button
-            className="btn btn-primary form-sign-up-btn"
+            className="btn btn-primary form-sign-up-btn authenticate-btn"
             onClick={handleSignUp}
           >
             Sign Up
@@ -175,18 +175,7 @@ export const Signup = () => {
               terms and conditions
             </span>
           </p>
-          <p className="form-or-text">
-            <span className="line"></span>Or<span className="line"></span>
-          </p>
 
-          <div className="form-default-mail-container">
-            <button className="btn btn-with-icon google-btn btn-black">
-              <span>
-                <span className="fa-brands fa-google btn-icon"></span> Sign up
-                using google
-              </span>
-            </button>
-          </div>
           <p className="small-text have-account-condition text-center muted-text-color">
             Already have an account ? <span> </span>
             <Link to="/login" className="secondary-text-color form-login-link">

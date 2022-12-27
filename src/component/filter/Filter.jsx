@@ -5,7 +5,9 @@ const Filter = () => {
   const { sortByState, priorityState, tagState, filterDispatch } = useFilter();
 
   const { work, exercise, homework, creative } = tagState;
-  const [checklist_visible, setVisible] = useState(false);
+  const [checklist_visible, setChecklistVisible] = useState(false);
+  const [dateSort_visible, setDateSortVisible] = useState(false);
+  const [prioritySort_visible, setPrioritySortVisible] = useState(false);
 
   const handleClearBtn = (e) => {
     e.preventDefault();
@@ -22,10 +24,6 @@ const Filter = () => {
         },
       },
     });
-  };
-
-  const handleChecklist = () => {
-    setVisible(!checklist_visible);
   };
 
   const handleSelect = (e) => {
@@ -65,17 +63,23 @@ const Filter = () => {
     <aside className="filter-section">
       <form className="filter-container" action="">
         <div className="filter-elements filter-category-element">
-          <p>Tags</p>
           <div className="checklist-container filter-input-element">
-            <span
-              className={`checklist-title ${
+            <button
+              className="checklist-btn filter-btn btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setChecklistVisible(!checklist_visible);
+                setDateSortVisible(false);
+                setPrioritySortVisible(false);
+              }}
+            >
+              <span className="fa-solid fa-tags"></span>
+            </button>
+            <ul
+              className={`filter-list checkbox-list list-style-none ${
                 checklist_visible ? 'visible' : ''
               }`}
-              onClick={handleChecklist}
             >
-              Tags
-            </span>
-            <ul className="checkbox-list list-style-none">
               <li>
                 <label className="margin-b-5">
                   <input
@@ -141,15 +145,55 @@ const Filter = () => {
           </div>
         </div>
         <div className="filter-elements filter-sort-element">
-          <p>Sort by</p>
+          <div className="date-sort-container filter-input-elements">
+            <button
+              className="date-btn filter-btn btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setDateSortVisible(!dateSort_visible);
+                setChecklistVisible(false);
+                setPrioritySortVisible(false);
+              }}
+            >
+              <span className="fa-solid fa-arrow-up-short-wide"></span>
+            </button>
+            <ul
+              className={`filter-list date-sort-list list-style-none ${
+                dateSort_visible ? 'visible' : ''
+              }`}
+            >
+              <li>
+                <label htmlFor="ascending">
+                  <input
+                    onChange={handleSelect}
+                    id="ascending"
+                    name="sort"
+                    type="radio"
+                    value="Date Ascending"
+                  />
+                  Date Ascending
+                </label>
+              </li>
+              <li>
+                <label htmlFor="descending">
+                  <input
+                    onChange={handleSelect}
+                    id="descending"
+                    name="sort"
+                    type="radio"
+                    value="Date Descending"
+                  />
+                  Date Descending
+                </label>
+              </li>
+            </ul>
+          </div>
 
-          <select
+          {/* <select
             className="select-input filter-input-element"
             onChange={handleSelect}
           >
-            <option disabled selected={sortByState ? false : true}>
-              --select option--
-            </option>
+            <option disabled>--select option--</option>
             <option
               selected={sortByState === 'DATE_ASC' ? true : false}
               name="sort"
@@ -164,12 +208,65 @@ const Filter = () => {
             >
               Date descending
             </option>
-          </select>
+          </select> */}
         </div>
         <div className="filter-elements filter-priority-element">
-          <p>Priority</p>
-
-          <select
+          <div className="priority-sort-container filter-input-elements">
+            <button
+              className="priority-btn filter-btn btn"
+              onClick={(e) => {
+                e.preventDefault();
+                setPrioritySortVisible(!prioritySort_visible);
+                setDateSortVisible(false);
+                setChecklistVisible(false);
+              }}
+            >
+              <span className="fa-solid fa-star"></span>
+            </button>
+            <ul
+              className={`filter-list priority-sort-list list-style-none ${
+                prioritySort_visible ? 'visible' : ''
+              }`}
+            >
+              <li>
+                <label htmlFor="priority_low">
+                  <input
+                    onChange={handlePrioritySelect}
+                    id="priority_low"
+                    name="priority"
+                    type="radio"
+                    value="priority_low"
+                  />
+                  Low
+                </label>
+              </li>
+              <li>
+                <label htmlFor="priority_medium">
+                  <input
+                    onChange={handlePrioritySelect}
+                    id="priority_medium"
+                    name="priority"
+                    type="radio"
+                    value="priority_medium"
+                  />
+                  Medium
+                </label>
+              </li>
+              <li>
+                <label htmlFor="priority_high">
+                  <input
+                    onChange={handlePrioritySelect}
+                    id="priority_high"
+                    name="priority"
+                    type="radio"
+                    value="priority_high"
+                  />
+                  High
+                </label>
+              </li>
+            </ul>
+          </div>
+          {/* <select
             className="select-input filter-input-element"
             onChange={handlePrioritySelect}
           >
@@ -197,16 +294,15 @@ const Filter = () => {
             >
               high
             </option>
-          </select>
+          </select> */}
         </div>
-
-        <button
-          onClick={handleClearBtn}
-          className="btn btn-link-primary filter-clear-btn"
-        >
-          Clear Filters
-        </button>
       </form>
+      <button
+        onClick={handleClearBtn}
+        className="btn btn-link-primary filter-clear-btn"
+      >
+        Clear Filters
+      </button>
     </aside>
   );
 };

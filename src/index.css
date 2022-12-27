@@ -7,12 +7,17 @@
   --slider-color: rgba(0, 0, 0, 0.418);
   --body-font: 'Cabin', sans-serif;
   --head-font: 'Montserrat', sans-serif;
-  --secondary-text-color: rgb(39, 37, 37);
+  --primary-text-color: rgb(255, 255, 255);
+  --secondary-text-color: rgb(54, 56, 46);
+  --form-input-color: #dedede;
+  --accent-color: rgb(240, 100, 73);
+  --muted-color: hsl(0, 0%, 48%);
 }
 
 .btn:hover {
-  background-color: var(--hover-color);
-  border-color: var(--hover-color);
+  background-color: transparent;
+
+  box-shadow: none;
 }
 
 .btn-black {
@@ -21,7 +26,7 @@
 }
 
 .btn-black:hover {
-  color: var(--primary-text-color);
+  color: var(--secondary-text-color);
 }
 
 body {
@@ -35,13 +40,16 @@ textarea {
   color: var(--secondary-text-color);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--head-font);
+input[type='radio'] {
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  /* scale: 0; */
+}
+
+input:hover {
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {

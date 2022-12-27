@@ -1,87 +1,159 @@
 .notes-modal-container {
-  display: block;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   backdrop-filter: blur(10px);
+  transition: all 0.25s;
+}
+
+.notes-modal-container.visible {
+  visibility: visible;
 }
 
 .notes-modal {
   background-color: var(--primary-text-color);
-  margin-top: 2rem;
-  min-width: 20rem;
+  padding: 2rem;
+  display: block;
+  margin: auto;
+  text-align: left;
+  /* margin-top: 2rem; */
+  min-width: 22rem;
   max-width: 53vw;
+
+  transform: scale(0);
+  opacity: 0;
+  transition: all 0.25s cubic-bezier(0.38, 0.42, 0, 1.3);
 }
 
-div.priority-section {
-  width: min-content;
+.notes-modal.visible {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .modal-form {
   overflow: hidden;
-  width: 95%;
-  padding: 1rem;
+  /* background-color: aqua; */
+  /* width: 95%; */
+  /* padding: 1rem; */
   border-radius: 0.5rem;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   position: relative;
+}
+
+.modal-title,
+.modal-description,
+.notes-modal-bottom-container {
+  /* padding-left: 1rem; */
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-form input,
+.modal-form select,
+.modal-form textarea {
+  /* border: 2px solid var(--hover-color); */
+  /* background-color: var(--muted-color); */
+  /* border: none; */
+  border: 2px solid var(--form-input-color);
+  width: 100%;
+  height: 2.5rem;
+  min-width: fit-content;
+  /* color: var(--primary-text-color); */
+}
+
+.form-content {
+  /* margin: 0.8rem 0; */
+  /* width: 85%; */
 }
 
 .modal-input-title,
 .modal-input-textarea {
-  width: 95%;
-  min-width: fit-content;
-  margin: 0 0 0 0.5rem;
+  /* width: 95%; */
+
+  /* margin: 0 0 0 0.5rem; */
 }
 
 .form-head {
-  display: flex;
-  justify-content: space-between;
+  /* display: flex; */
+  /* justify-content: space-between; */
 }
 
-.modal-input-textarea {
-  height: 20rem;
-  max-width: 95%;
+.modal-form .modal-input-textarea {
+  height: 25vh;
+  resize: none;
+  /* max-width: 95%; */
 }
 
-.priority-input {
-  min-width: max-content;
+.priority-option,
+.tag-inputs {
+  margin-right: 0.5rem;
+  /* background-color: rgb(202, 202, 207); */
+  border: 2px solid var(--form-input-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: 0.2s;
+  position: relative;
+  cursor: pointer;
+  /* min-width: max-content; */
 }
 
-.form-content {
-  margin: 0.8rem 0;
-  width: 85%;
+.priority-option:hover,
+.priority-option:focus,
+.tag-inputs:hover,
+.tag-inputs:hover {
+  border-radius: 1.5rem;
+  border-color: var(--secondary-text-color);
 }
 
-.checkbox-container,
+.tag-inputs.active,
+.priority-option.active {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-text-color);
+  border-color: var(--secondary-text-color);
+}
+
 .checkbox-container label,
 .form-bottom {
-  display: flex;
-  justify-content: space-around;
+  /* display: flex; */
+  /* justify-content: space-around; */
 }
+
 .checkbox-container {
-  width: 95%;
-  min-width: fit-content;
+  /* overflow-x: scroll; */
+  /* width: fit-content; */
+  /* position: relative; */
+  /* background-color: aquamarine; */
+  /* position: absolute; */
+  /* width: 95%; */
+  /* min-width: fit-content; */
   flex-wrap: wrap;
-  margin-left: auto;
+
+  /* margin-left: auto; */
 }
 
-.checkbox {
-  vertical-align: baseline;
+.checkbox-container .tag-inputs {
+  margin-top: 0.2rem;
 }
 
-.tags,
-.tags .modal-input-title {
-  margin: 0;
+.checkbox-container .checkbox {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
 }
 
-.modal-title,
-.modal-description {
-  padding-left: 1rem;
-  margin-bottom: 2px;
-}
+/* .priority-option:has(input[type='radio']:checked) {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-text-color);
+  border-color: var(--secondary-text-color);
+} */
 
-.modal-title-priority {
-  padding-left: 0;
+.notes-modal-bottom-container {
+  justify-content: center;
 }
 
 .color-container {
@@ -104,4 +176,10 @@ div.priority-section {
 }
 .color-icon {
   font-size: 2rem;
+}
+
+@media screen and (max-width: 54em) {
+  .notes-modal {
+    max-width: 75vw;
+  }
 }

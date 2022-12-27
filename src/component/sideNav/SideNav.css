@@ -3,12 +3,19 @@
   display: flex;
   flex-direction: column;
   padding: 1rem 1rem 0.5rem 4rem;
-
   height: 100vh;
+}
+
+.btn-link {
+  color: var(--muted-color);
+  border-width: 2px;
 }
 
 .btn-link:hover {
   text-decoration: none;
+  border-width: 2px;
+  border-color: var(--secondary-text-color);
+  color: var(--secondary-text-color);
   border-radius: 0.75rem;
 }
 

@@ -14,7 +14,7 @@ export const SideNav = () => {
         <span className="sidebar-link-text">Home</span>
       </NavLink>
       <NavLink to="/label" className="btn btn-link sidebar-items">
-        <span className="fa-solid fa-hashtag"></span>{' '}
+        <span className="fa-solid fa-tag"></span>{' '}
         <span className="sidebar-link-text">Label</span>
       </NavLink>
       <NavLink to="/archive" className="btn btn-link sidebar-items">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import {
   useToken,
   useDeleteList,
@@ -12,11 +12,13 @@ export const Navbar = () => {
   const { token, setToken } = useToken();
   const { setDeleteList } = useDeleteList();
   const { setArchiveList } = useArchivesList();
+  const location = useLocation();
   const handleLogout = () => {
     setToken(localStorage.clear());
     setDeleteList([]);
     setArchiveList([]);
   };
+  console.log(location);
   return (
     <>
       <header className="navbar home-navbar">
@@ -25,15 +27,15 @@ export const Navbar = () => {
             <NavLink to="/">Take Notes</NavLink>
           </h2>
         </div>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <nav className="navbar-menu">
           <ul className="navbar-list list-style-none">
             {token ? (
               <li className="navbar-item">
                 <Link
                   onClick={handleLogout}
-                  to="/explore"
-                  className="btn navbar-link"
+                  to="/signup"
+                  className="btn navbar-link btn-black"
                 >
                   Logout
                 </Link>
@@ -41,7 +43,7 @@ export const Navbar = () => {
             ) : (
               <>
                 <li className="navbar-item">
-                  <NavLink to="/login" className="navbar-link btn">
+                  <NavLink to="/login" className="navbar-link btn btn-black">
                     Login
                   </NavLink>
                 </li>

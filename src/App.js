@@ -8,7 +8,6 @@ import {
   Archive,
   Label,
   Delete,
-  Explore,
 } from './page/page-index';
 
 function App() {
@@ -51,8 +50,6 @@ function App() {
               </RequiresAuth>
             }
           />
-
-          <Route path="/explore" element={<Explore />} />
         </Routes>
       </div>
     </div>

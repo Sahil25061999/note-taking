@@ -49,6 +49,7 @@
 .input-container .textbox {
   width: 100%;
   min-width: min-content;
+  border: 2px solid var(--form-input-color);
 }
 .textbox:hover,
 .textbox:focus {
@@ -74,14 +75,24 @@
   font-weight: 400;
 }
 
-.form-sign-up-btn,
-.form-log-in-btn,
-.form-default-mail-container .google-btn {
+.authenticate-btn,
+.form-default-mail-container {
   width: 100%;
+  background-color: var(--secondary-text-color);
+  border-color: var(--secondary-text-color);
+  color: var(--primary-text-color);
+  border-radius: 0.8rem;
 }
 
 .form-log-in-btn {
   margin: 8px 0;
+}
+
+.authenticate-btn:hover {
+  border-radius: 1.5rem;
+  border-color: var(--secondary-text-color);
+  background-color: var(--secondary-text-color);
+  transition: 0.5s;
 }
 
 .form-or-text {
