@@ -18,6 +18,7 @@ import { getNote } from '../../api-call/api-index';
 export const HomePage = () => {
   const { notesList, setNotesList } = useNotesList();
   const { tagState, priorityState, sortByState } = useFilter();
+  const { work, exercise, homework, creative } = tagState;
   const { token } = useToken();
   useEffect(() => {
     (async () => {
@@ -48,8 +49,10 @@ export const HomePage = () => {
       <div className="main-page">
         <main>
           <div className="d-flex home-head">
-            <Filter />
             <AddNoteBtn />
+          </div>
+          <div className="notes-info-section d-flex">
+            <Filter />
           </div>
           <NotesInputModal />
           <div className="notes-section">

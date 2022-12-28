@@ -1,3 +1,9 @@
+.close-btn:hover {
+  background-color: var(--secondary-text-color);
+  border-color: var(--secondary-text-color);
+  transition: 0.2s;
+}
+
 .notes-modal-container {
   visibility: hidden;
   display: flex;
@@ -89,7 +95,8 @@
 }
 
 .priority-option,
-.tag-inputs {
+.tag-inputs,
+.add-color-btn {
   margin-right: 0.5rem;
   /* background-color: rgb(202, 202, 207); */
   border: 2px solid var(--form-input-color);
@@ -156,10 +163,32 @@
   justify-content: center;
 }
 
-.color-container {
+.add-color-btn,
+.add-color-btn:hover {
+  font-size: medium;
+  border-color: var(--secondary-text-color);
+  color: var(--secondary-text-color);
+  transition: 0.2s;
+}
+
+.add-btn,
+.add-btn:hover {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-text-color);
+}
+
+.add-color-btn:hover {
+  border-radius: 1.5rem;
+}
+
+.color-btn {
   position: relative;
   width: max-content;
   height: max-content;
+}
+
+.color-btn label {
+  font-weight: bold;
 }
 
 .color-selector {
@@ -167,15 +196,9 @@
   cursor: pointer;
   width: 100%;
   height: 100%;
+  left: 0;
+  top: 0;
   opacity: 0;
-}
-
-.color-selector:hover ~ .color-icon,
-.color-selector:focus ~ .color-icon {
-  color: var(--hover-color);
-}
-.color-icon {
-  font-size: 2rem;
 }
 
 @media screen and (max-width: 54em) {

@@ -9,6 +9,6 @@ export const RequiresAuth = ({ children }) => {
   return token ? (
     children
   ) : (
-    <Navigate state={{ from: location }} to="/login" replace />
+    <Navigate state={{ from: location }} to="/signup" replace />
   );
 };

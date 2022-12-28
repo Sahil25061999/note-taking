@@ -7,7 +7,6 @@
 }
 
 .filter-container {
-  /* background: red; */
   border: 2px solid var(--secondary-text-color);
   border-radius: 0.5rem;
   padding: 0.2rem;
@@ -26,6 +25,10 @@
   border-right: 2px solid var(--secondary-text-color);
 }
 
+.filter-list {
+  background-color: var(--primary-text-color);
+}
+
 .filter-elements:last-child {
   border: none;
 }
@@ -38,7 +41,6 @@
 .filter-btn:hover,
 .filter-btn:focus {
   cursor: pointer;
-
   color: var(--hover-color);
 }
 
@@ -150,5 +152,6 @@
   .filter-container {
     justify-content: flex-start;
     flex-wrap: wrap;
+    margin: 8px;
   }
 }
