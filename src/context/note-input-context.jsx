@@ -89,7 +89,7 @@ export const NoteInputProvider = ({ children }) => {
       note: {
         title: '',
         description: '',
-        color: '#f1f1f1',
+        color: '#ffffff',
         priority: '',
         tags: {
           work: false,

@@ -6,3 +6,4 @@ export { NotesInputModal } from './notesInputModal/NotesInputModal';
 export { NoteCard } from './noteCard/NoteCard';
 export { Filter } from './filter/Filter';
 export { RequiresAuth } from './requireAuth/RequiresAuth';
+export { FilterModal } from './filterModal/FilterModal';

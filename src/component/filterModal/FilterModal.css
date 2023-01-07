@@ -1,0 +1,61 @@
+.date-option {
+  margin-right: 0.5rem;
+  border: 2px solid var(--form-input-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: 0.2s;
+  position: relative;
+  cursor: pointer;
+}
+
+.date-option:hover,
+.date-option:focus {
+  border-radius: 1.5rem;
+  border-color: var(--secondary-text-color);
+}
+
+.date-option.active {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-text-color);
+  border-color: var(--secondary-text-color);
+}
+
+.filter-form-head {
+  justify-content: space-between;
+  align-items: center;
+  margin-block: 0.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--form-input-color);
+}
+
+.filter-form-head .modal-title {
+  margin-block: 0;
+}
+
+.filter-form-head .close-btn {
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+.filter-modal-bottom-container {
+  margin-top: 3rem;
+  width: 100%;
+}
+
+.clear-btn {
+  margin-left: auto;
+  border: 2px solid var(--form-input-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  transition: 0.2s;
+  font-size: medium;
+  position: relative;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  border-color: var(--secondary-text-color);
+  color: var(--secondary-text-color);
+  border-radius: 1.5rem;
+}

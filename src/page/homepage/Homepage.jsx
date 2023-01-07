@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
   AddNoteBtn,
   Filter,
+  FilterModal,
   NoteCard,
   NotesInputModal,
   SideNav,
@@ -55,6 +56,7 @@ export const HomePage = () => {
             <Filter />
           </div>
           <NotesInputModal />
+          <FilterModal />
           <div className="notes-section">
             {filteredList?.length &&
               filteredList.map((item) => (

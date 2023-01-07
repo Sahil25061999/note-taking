@@ -5,6 +5,9 @@ const FilterContext = createContext();
 const FilterProvider = ({ children }) => {
   const reducerFunc = (state, action) => {
     switch (action.type) {
+      case 'DISPLAY_FILTER_MODAL':
+        return { ...state, displayFilterModal: !state.displayFilterModal };
+
       case 'CLEAR':
         return (state = action.payload);
 
@@ -51,34 +54,36 @@ const FilterProvider = ({ children }) => {
       /*                Priortiy Filter                              */
 
       case 'PRIORITY_LOW_FILTER':
-        return { ...state, priorityState: 'PRIORITY_LOW' };
+        return { ...state, priorityState: action.payload };
       case 'PRIORITY_MEDIUM_FILTER':
-        return { ...state, priorityState: 'PRIORITY_MEDIUM' };
+        return { ...state, priorityState: action.payload };
       case 'PRIORITY_HIGH_FILTER':
-        return { ...state, priorityState: 'PRIORITY_HIGH' };
+        return { ...state, priorityState: action.payload };
 
       default:
         return state;
     }
   };
 
-  const [{ sortByState, priorityState, tagState }, filterDispatch] = useReducer(
-    reducerFunc,
-    {
-      sortByState: null,
-      priorityState: null,
-      tagState: {
-        work: false,
-        homework: false,
-        exercise: false,
-        creative: false,
-      },
-    }
-  );
+  const [
+    { displayFilterModal, sortByState, priorityState, tagState },
+    filterDispatch,
+  ] = useReducer(reducerFunc, {
+    displayFilterModal: false,
+    sortByState: null,
+    priorityState: null,
+    tagState: {
+      work: false,
+      homework: false,
+      exercise: false,
+      creative: false,
+    },
+  });
 
   return (
     <FilterContext.Provider
       value={{
+        displayFilterModal,
         sortByState,
         priorityState,
         tagState,

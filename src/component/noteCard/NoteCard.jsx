@@ -93,11 +93,16 @@ export const NoteCard = ({ item, archive, label }) => {
           <div className="badge-container">
             {Object.keys(item.tags)
               .filter((catKey) => item.tags[catKey])
-              .map((badge) => (
-                <span key={badge} className="badge-text badge-sm badge-accent">
-                  {badge.toUpperCase()}
-                </span>
-              ))}
+              .map((badge) =>
+                badge.length > 1 ? (
+                  <span
+                    key={badge}
+                    className="badge-text badge-sm badge-accent"
+                  >
+                    {badge.toUpperCase()}
+                  </span>
+                ) : null
+              )}
             <span className="badge-text badge-sm badge-secondary">
               {priority.slice(9)}
             </span>

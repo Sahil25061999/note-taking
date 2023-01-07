@@ -1,8 +1,8 @@
 .add-button {
-  order: -1;
+  /* order: -1; */
   height: 12rem;
   width: 13rem;
-  border-radius: 1rem;
+  border-radius: 1.5rem;
   border: none;
   margin-bottom: 1rem;
   cursor: pointer;
@@ -13,4 +13,13 @@
 
 .add-button:hover {
   box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.add-button-float {
+  height: 2rem;
+  aspect-ratio: 1;
+  background-color: red;
+  position: fixed;
+  bottom: 2;
+  right: 2;
 }

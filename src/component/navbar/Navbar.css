@@ -23,8 +23,6 @@
 .navbar-link.active {
   background-color: transparent;
   border: 2px solid var(--muted-color);
-  /* border: transparent; */
-
   color: var(--muted-color);
 }
 .navbar-link.active:hover {
@@ -62,7 +60,6 @@
 
   .hamburger-btn {
     display: block;
-
     right: 1.5rem;
   }
 
@@ -74,7 +71,6 @@
     position: fixed;
     inset: 0 0 0 60%;
     height: 100vh;
-    /* width: 100%; */
     transform: translateX(100%);
     transition: 0.5s ease-in;
   }
@@ -101,21 +97,4 @@
   .navbar-menu {
     left: 40%;
   }
-  /* .navbar-icon {
-    font-size: 1rem;
-  }
-
-  .home-navbar .logo-container {
-    justify-self: start;
-  }
-
-  .home-navbar .navbar-menu {
-    justify-self: end;
-  } */
-}
-
-@media only screen and (max-width: 34.06em) {
-  /* .home-navbar {
-    padding: 8px 2rem;
-  } */
 }

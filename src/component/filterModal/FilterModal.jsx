@@ -1,121 +1,195 @@
 import React from 'react';
+import './FilterModal.css';
+import { useFilter } from '../../context/context-index';
 
 export const FilterModal = () => {
+  const {
+    sortByState,
+    priorityState,
+    tagState,
+    filterDispatch,
+    displayFilterModal,
+  } = useFilter();
+  const { work, exercise, homework, creative } = tagState;
+
+  const handleClearBtn = (e) => {
+    e.preventDefault();
+    filterDispatch({
+      type: 'CLEAR',
+      payload: {
+        sortByState: null,
+        priorityState: null,
+        tagState: {
+          work: false,
+          homework: false,
+          creative: false,
+          exercise: false,
+        },
+      },
+    });
+  };
+
   return (
     <div
       className={`modal-container notes-modal-container ${
-        displayModal ? 'visible' : ''
+        displayFilterModal ? 'visible' : ''
       }`}
     >
       <div
-        className={`modal shadow notes-modal ${displayModal ? 'visible' : ''}`}
+        className={`modal shadow notes-modal ${
+          displayFilterModal ? 'visible' : ''
+        }`}
       >
-        <button
-          onClick={() => {
-            noteDispatch({
-              type: 'CLEAR_AFTER_ADD',
-              payload: {
-                note: {
-                  title: '',
-                  description: '',
-                  color: '#ffffff',
-                  priority: '',
-                  tags: {
-                    work: false,
-                    homework: false,
-                    creative: false,
-                    exercise: false,
-                  },
-                  createdAt: '',
-                },
-                displayModal: false,
-                editId: '',
-              },
-            });
-            errorDispatch({ type: 'NOTE_DESCRIPTION_ERROR', payload: '' });
-            errorDispatch({ type: 'NOTE_TITLE_ERROR', payload: '' });
-          }}
-          className="btn btn-float close-btn"
-        >
-          <span className="fa-solid fa-xmark"></span>
-        </button>
+        <div className="filter-form-head d-flex">
+          <h1 className="modal-title">Filters</h1>
+          <button
+            onClick={() => {
+              filterDispatch({ type: 'DISPLAY_FILTER_MODAL' });
+            }}
+            className="btn btn-float close-btn"
+          >
+            <span className="fa-solid fa-xmark"></span>
+          </button>
+        </div>
 
         <form className="modal-form" onClick={(e) => e.stopPropagation()}>
-          {/*                   TITLE BOX                           */}
-          <div className=" form-head form-content">
-            <div className="form-content title-section">
-              <h3 className=" modal-title">
-                Title
-                <span className="error-msg"> {noteTitleError}</span>
-              </h3>
-              <input
-                onChange={(e) =>
-                  noteDispatch({ type: 'TITLE', payload: e.target.value })
-                }
-                className="textbox modal-input-title"
-                id="title"
-                type="text"
-                placeholder="Enter a Title"
-                value={title}
-              />
-            </div>
-            {/*                   PRIORITY SECTION              */}
-            <div className="form-content priority-section">
-              <h3 className=" modal-title modal-title-priority">
-                <strong>Priority</strong>
-              </h3>
-              <ul className="priority-input-list list-style-none d-flex">
-                <li
-                  className={`priority-option ${
-                    priority === 'PRIORITY_LOW' ? 'active' : ''
-                  }`}
-                >
-                  <label htmlFor="priority-low">
-                    <input
-                      onClick={handlePriorityChange}
-                      type="radio"
-                      name="priortiy"
-                      id="priority-low"
-                      value="PRIORITY_LOW"
-                    />
-                    Low
-                  </label>
-                </li>
-                <li
-                  className={`priority-option ${
-                    priority === 'PRIORITY_MEDIUM' ? 'active' : ''
-                  }`}
-                >
-                  <label htmlFor="priority-medium">
-                    <input
-                      onClick={handlePriorityChange}
-                      type="radio"
-                      name="priortiy"
-                      id="priority-medium"
-                      value="PRIORITY_MEDIUM"
-                    />
-                    Medium
-                  </label>
-                </li>
-                <li
-                  className={`priority-option ${
-                    priority === 'PRIORITY_HIGH' ? 'active' : ''
-                  }`}
-                >
-                  <label htmlFor="priority-high">
-                    <input
-                      onClick={handlePriorityChange}
-                      type="radio"
-                      name="priortiy"
-                      id="priority-high"
-                      value="PRIORITY_HIGH"
-                    />
-                    High
-                  </label>
-                </li>
-              </ul>
-            </div>
+          <div className="form-content priority-section">
+            <h3 className=" modal-title modal-title-date">
+              <strong>Date</strong>
+            </h3>
+            <ul className="priority-input-list list-style-none d-flex">
+              <li
+                className={`date-option ${
+                  sortByState === 'DATE_DESC' ? 'active' : ''
+                }`}
+              >
+                <label htmlFor="date-descending">
+                  <input
+                    onClick={() =>
+                      filterDispatch({
+                        type: 'DATE_DESC',
+                        payload: 'DATE_DESC',
+                      })
+                    }
+                    type="radio"
+                    name="date"
+                    id="date-descending"
+                    value="DATE_DESCENDING"
+                  />
+                  Recently Added
+                </label>
+              </li>
+              <li
+                className={`date-option ${
+                  sortByState === 'DATE_ASC' ? 'active' : ''
+                }`}
+              >
+                <label htmlFor="date-ascending">
+                  <input
+                    onClick={() =>
+                      filterDispatch({
+                        type: 'DATE_ASC',
+                        payload: 'DATE_ASC',
+                      })
+                    }
+                    type="radio"
+                    name="date"
+                    id="date-ascending"
+                    value="DATE_ASCENDING"
+                  />
+                  Oldest
+                </label>
+              </li>
+            </ul>
           </div>
+
+          {/*                   PRIORITY SECTION              */}
+          <div className="form-content priority-section">
+            <h3 className=" modal-title modal-title-priority">
+              <strong>Priority</strong>
+            </h3>
+            <ul className="priority-input-list list-style-none d-flex">
+              <li
+                className={`priority-option ${
+                  priorityState === 'PRIORITY_LOW' ? 'active' : ''
+                }`}
+              >
+                <label htmlFor="priority-low">
+                  <input
+                    onClick={() =>
+                      priorityState === 'PRIORITY_LOW'
+                        ? filterDispatch({
+                            type: 'PRIORITY_LOW_FILTER',
+                            payload: '',
+                          })
+                        : filterDispatch({
+                            type: 'PRIORITY_LOW_FILTER',
+                            payload: 'PRIORITY_LOW',
+                          })
+                    }
+                    type="radio"
+                    name="priortiy"
+                    id="priority-low"
+                    value="PRIORITY_LOW"
+                  />
+                  Low
+                </label>
+              </li>
+              <li
+                className={`priority-option ${
+                  priorityState === 'PRIORITY_MEDIUM' ? 'active' : ''
+                }`}
+              >
+                <label htmlFor="priority-medium">
+                  <input
+                    onClick={() =>
+                      priorityState === 'PRIORITY_MEDIUM'
+                        ? filterDispatch({
+                            type: 'PRIORITY_MEDIUM_FILTER',
+                            payload: '',
+                          })
+                        : filterDispatch({
+                            type: 'PRIORITY_MEDIUM_FILTER',
+                            payload: 'PRIORITY_MEDIUM',
+                          })
+                    }
+                    type="radio"
+                    name="priortiy"
+                    id="priority-medium"
+                    value="PRIORITY_MEDIUM"
+                  />
+                  Medium
+                </label>
+              </li>
+              <li
+                className={`priority-option ${
+                  priorityState === 'PRIORITY_HIGH' ? 'active' : ''
+                }`}
+              >
+                <label htmlFor="priority-high">
+                  <input
+                    onClick={() =>
+                      priorityState === 'PRIORITY_HIGH'
+                        ? filterDispatch({
+                            type: 'PRIORITY_HIGH_FILTER',
+                            payload: '',
+                          })
+                        : filterDispatch({
+                            type: 'PRIORITY_HIGH_FILTER',
+                            payload: 'PRIORITY_HIGH',
+                          })
+                    }
+                    type="radio"
+                    name="priortiy"
+                    id="priority-high"
+                    value="PRIORITY_HIGH"
+                  />
+                  High
+                </label>
+              </li>
+            </ul>
+          </div>
+          {/* </div> */}
 
           {/*                   Tags                           */}
           <div className="form-content tags-section">
@@ -130,7 +204,7 @@ export const FilterModal = () => {
                     type="checkbox"
                     checked={work}
                     onChange={() => {
-                      noteDispatch({ type: 'WORK' });
+                      filterDispatch({ type: 'WORK_FILTER' });
                     }}
                     value="work"
                   />
@@ -146,7 +220,7 @@ export const FilterModal = () => {
                     type="checkbox"
                     checked={homework}
                     onChange={() => {
-                      noteDispatch({ type: 'HOMEWORK' });
+                      filterDispatch({ type: 'HOMEWORK_FILTER' });
                     }}
                     value="homework"
                   />
@@ -162,7 +236,7 @@ export const FilterModal = () => {
                     type="checkbox"
                     checked={exercise}
                     onChange={() => {
-                      noteDispatch({ type: 'EXERCISE' });
+                      filterDispatch({ type: 'EXERCISE_FILTER' });
                     }}
                     value="exercise"
                   />
@@ -178,7 +252,7 @@ export const FilterModal = () => {
                     type="checkbox"
                     checked={creative}
                     onChange={() => {
-                      noteDispatch({ type: 'CREATIVE' });
+                      filterDispatch({ type: 'CREATIVE_FILTER' });
                     }}
                     value="creative"
                   />
@@ -187,43 +261,12 @@ export const FilterModal = () => {
               </li>
             </ul>
           </div>
-          {/*                   Description BOX                           */}
-          <div className="form-content description-section">
-            <h3 className=" modal-description">
-              Description
-              <span className="error-msg"> {noteDescriptionError}</span>
-            </h3>
-            <textarea
-              onChange={(e) =>
-                noteDispatch({ type: 'DESCRIPTION', payload: e.target.value })
-              }
-              className="textbox textbox-area modal-input-textarea"
-              id="description"
-              value={description}
-            ></textarea>
-          </div>
+
           {/*                   Button BOX                           */}
-          <div className="form-bottom d-flex notes-modal-bottom-container">
-            <button
-              className="btn  margin-r-10 add-color-btn add-btn"
-              onClick={handleAddNote}
-            >
-              {editId ? 'Save' : 'Add'}
+          <div className="form-bottom d-flex notes-modal-bottom-container filter-modal-bottom-container">
+            <button className="btn  clear-btn" onClick={handleClearBtn}>
+              Clear All
             </button>
-            <div className="color-container btn add-color-btn color-btn">
-              <label htmlFor="color-selector">
-                <input
-                  id="color-selector"
-                  className="color-selector"
-                  onChange={(e) =>
-                    noteDispatch({ type: 'COLOR', payload: e.target.value })
-                  }
-                  type="color"
-                  value={color}
-                />
-                Color
-              </label>
-            </div>
           </div>
         </form>
       </div>
