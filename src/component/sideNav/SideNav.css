@@ -34,6 +34,11 @@
   margin-left: 8px;
 }
 
+.badge-notify {
+  background-color: var(--secondary-text-color);
+  color: var(--primary-text-color);
+}
+
 @media only screen and (max-width: 64em) {
   .sidebar {
     display: none;

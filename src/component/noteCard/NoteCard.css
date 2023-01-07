@@ -42,3 +42,13 @@
   background-color: var(--secondary-text-color);
   color: var(--primary-text-color);
 }
+
+.badge-category {
+  background-color: var(--muted-color);
+  color: var(--primary-text-color);
+}
+
+.badge-priority {
+  background-color: var(--primary-text-color);
+  border: 1.5px solid var(--muted-color);
+}

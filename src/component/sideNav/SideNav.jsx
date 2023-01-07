@@ -37,11 +37,6 @@ export const SideNav = () => {
           )}
         </span>
       </NavLink>
-      <NavLink to="/profile" className="btn btn-link sidebar-items">
-        <span className="fa-solid fa-user"></span>
-        {'  '}
-        <span className="sidebar-link-text">Profile</span>
-      </NavLink>
     </nav>
   );
 };

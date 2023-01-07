@@ -92,11 +92,11 @@ export const Navbar = () => {
                     <span className="sidebar-link-text">Profile</span>
                   </NavLink>
                 </li>
-                <li className="navbar-items">
+                <li className="navbar-items logout-btn">
                   <Link
                     onClick={handleLogout}
                     to="/signup"
-                    className="btn navbar-link  "
+                    className="btn navbar-link "
                   >
                     Logout
                   </Link>
