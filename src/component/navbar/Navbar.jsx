@@ -85,13 +85,7 @@ export const Navbar = () => {
                     </span>
                   </NavLink>
                 </li>
-                <li className="navbar-items">
-                  <NavLink to="/profile" className="btn btn-link sidebar-items">
-                    <span className="fa-solid fa-user"></span>
-                    {'  '}
-                    <span className="sidebar-link-text">Profile</span>
-                  </NavLink>
-                </li>
+
                 <li className="navbar-items logout-btn">
                   <Link
                     onClick={handleLogout}
