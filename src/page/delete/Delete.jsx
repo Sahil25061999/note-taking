@@ -2,9 +2,11 @@ import React from 'react';
 import { NoteCard, SideNav } from '../../component/component-index';
 import { useDeleteList } from '../../context/context-index';
 import Empty from '../../assets/image/Empty-amico.svg';
+import { useDocumentTitle } from '../../hook/useDocumentTilte';
 export const Delete = () => {
   const { deleteList } = useDeleteList();
 
+  useDocumentTitle('Trash | Take Notes');
   return (
     <>
       <SideNav />

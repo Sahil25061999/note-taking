@@ -29,7 +29,8 @@
   color: var(--secondary-text-color);
 }
 
-body {
+body,
+button {
   overflow-x: hidden;
   font-family: var(--body-font);
 }

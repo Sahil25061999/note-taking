@@ -3,6 +3,7 @@ import { NoteCard, SideNav } from '../../component/component-index';
 import { useFilter } from '../../context/filter-context';
 import { useNotesList } from '../../context/notes-list-context';
 import Nodata from '../../assets/image/No data-cuate.svg';
+import { useDocumentTitle } from '../../hook/useDocumentTilte';
 
 export const Label = () => {
   const { tagState } = useFilter();
@@ -21,6 +22,7 @@ export const Label = () => {
     }
     setLabelList({ ...labelList, ...obj });
   }, []);
+  useDocumentTitle('Labels | Take Notes');
 
   return (
     <>

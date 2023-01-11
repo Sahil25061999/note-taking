@@ -15,6 +15,7 @@ import {
 } from '../../utilities/utilities-index';
 import './Homepage.css';
 import { getNote } from '../../api-call/api-index';
+import { useDocumentTitle } from '../../hook/useDocumentTilte';
 
 export const HomePage = () => {
   const { notesList, setNotesList } = useNotesList();
@@ -43,6 +44,8 @@ export const HomePage = () => {
     getTagData,
     getSortedData,
   });
+
+  useDocumentTitle('Take Notes');
 
   return (
     <>

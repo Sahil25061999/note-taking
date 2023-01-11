@@ -5,6 +5,7 @@ import '../Authentication.css';
 import { useToken } from '../../../context/context-index';
 import { checkemail, checkpassword } from '../../../utilities/utilities-index';
 import { useError } from '../../../reducer/useError';
+import { useDocumentTitle } from '../../../hook/useDocumentTilte';
 export const Signup = () => {
   const [user, setUser] = useState({
     fullname: '',
@@ -88,6 +89,7 @@ export const Signup = () => {
       navigate('/', { replace: true });
     }
   };
+  useDocumentTitle('Sign Up | Take Notes');
   return (
     <main className="authentication-body">
       <form action="" className="form-container signup-container">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import {
   useToken,
   useDeleteList,
@@ -12,15 +12,19 @@ export const Navbar = () => {
   const [hideNav, setHideNav] = useState(true);
   const { token, setToken } = useToken();
   const { setDeleteList, deleteList } = useDeleteList();
-  const { setArchiveList, archivesList } = useArchivesList();
+  const { setArchivesList, archivesList } = useArchivesList();
 
   const archiveLength = archivesList.length;
+
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleLogout = () => {
+    // console.log(localStorage.clear());
     setToken(localStorage.clear());
     setDeleteList([]);
-    setArchiveList([]);
+    setArchivesList([]);
+    navigate('/login', { replace: true });
   };
   useEffect(() => {
     setHideNav(true);
@@ -42,7 +46,7 @@ export const Navbar = () => {
             className={`fa-solid ${hideNav ? 'fa-bars' : 'fa-xmark'}`}
           ></span>
         </button>
-        {/* <SearchBar /> */}
+
         <nav className="navbar-menu" data-hidden={hideNav}>
           <ul className="navbar-list list-style-none">
             {token ? (
@@ -87,13 +91,13 @@ export const Navbar = () => {
                 </li>
 
                 <li className="navbar-items logout-btn">
-                  <Link
+                  <button
                     onClick={handleLogout}
                     to="/signup"
-                    className="btn navbar-link "
+                    className="btn navbar-link logout"
                   >
                     Logout
-                  </Link>
+                  </button>
                 </li>
               </>
             ) : (

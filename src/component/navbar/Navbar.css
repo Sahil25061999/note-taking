@@ -53,6 +53,10 @@
   display: none;
 }
 
+.logout {
+  font-size: 1rem;
+}
+
 @media screen and (max-width: 64em) {
   .home-navbar {
     padding-inline: 1.5rem;
@@ -78,6 +82,27 @@
 
   .navbar-menu[data-hidden='false'] {
     transform: translateX(0);
+  }
+
+  .btn.logout {
+    color: var(--muted-color);
+    font-weight: 800;
+    padding: 8px 9.92px;
+    border-width: 2px;
+  }
+
+  .btn.logout:hover {
+    border-width: 2px;
+    background-color: transparent;
+    border-color: var(--secondary-text-color);
+    color: var(--secondary-text-color);
+    border-radius: 0.75rem;
+  }
+
+  .logout::before {
+    font-family: FontAwesome;
+    content: '\f007';
+    margin-right: 8px;
   }
 
   .navbar-list {

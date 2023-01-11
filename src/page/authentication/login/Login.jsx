@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useToken } from '../../../context/context-index';
 import { postLogin } from '../../../api-call/api-index';
 import { useError } from '../../../reducer/useError';
-
+import { useDocumentTitle } from '../../../hook/useDocumentTilte';
 export const Login = () => {
   const [user, setUser] = useState({
     loginEmail: '',
@@ -47,6 +47,7 @@ export const Login = () => {
     }
   }, []);
 
+  useDocumentTitle('Login In | Take Notes');
   return (
     <main className="authentication-body">
       <form action="" className="form-container login-container">

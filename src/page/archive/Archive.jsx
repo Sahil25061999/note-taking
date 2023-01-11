@@ -3,9 +3,12 @@ import { useArchivesList } from '../../context/context-index';
 import Nodata from '../../assets/image/No data-cuate.svg';
 import './Archive.css';
 import { NoteCard, SideNav } from '../../component/component-index';
+import { useDocumentTitle } from '../../hook/useDocumentTilte';
 
 export const Archive = () => {
   const { archivesList } = useArchivesList();
+
+  useDocumentTitle('Archive | Take Notes');
 
   return (
     <>
