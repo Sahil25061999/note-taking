@@ -3,10 +3,10 @@ import './AddNotesBtn.css';
 import { useNoteInputContext, useToken } from '../../context/context-index';
 import { useNavigate } from 'react-router';
 
-export const AddNoteBtn = () => {
+export const AddNoteBtn = ({ getBtnRef, btnFloat }) => {
   const { displayModal, noteDispatch } = useNoteInputContext();
-  const [btnFloat, setBtnFloat] = useState(false);
-  const btnRef = useRef();
+  const addBtnRef = useRef();
+
   const navigate = useNavigate();
   const { token } = useToken();
   const handleAddClick = () => {
@@ -15,30 +15,26 @@ export const AddNoteBtn = () => {
       : navigate('/login');
   };
 
-  const toggleFloatFun = () => {
-    console.log('mew');
-    if (window.pageYOffset > 50) {
-      console.log('yeah');
-      setBtnFloat(true);
-    } else {
-      setBtnFloat(false);
-    }
-  };
-
   useEffect(() => {
-    window.addEventListener('scroll', toggleFloatFun);
-    return () => {
-      window.removeEventListener('scroll', toggleFloatFun);
-    };
+    getBtnRef(addBtnRef);
   }, []);
 
   return (
-    <button
-      className={`add-button ${btnFloat ? 'add-btn-float' : ''}`}
-      onClick={handleAddClick}
-      ref={btnRef}
-    >
-      <span className="add-button-icon fas fa-plus-circle"></span>
-    </button>
+    <>
+      <button
+        className={`add add-btn-float ${btnFloat ? 'visible' : ''}`}
+        onClick={handleAddClick}
+      >
+        <span className="add-button-icon fas fa-plus-circle"></span>
+      </button>
+
+      <button
+        className="add add-button"
+        onClick={handleAddClick}
+        ref={addBtnRef}
+      >
+        <span className="add-button-icon fas fa-plus-circle"></span>
+      </button>
+    </>
   );
 };

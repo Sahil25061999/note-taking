@@ -28,11 +28,14 @@
 .btn-black:hover {
   color: var(--secondary-text-color);
 }
-
-body,
 button {
+  font-family: var(--body-font);
+}
+
+body {
   overflow-x: hidden;
   font-family: var(--body-font);
+  height: 100%;
 }
 
 input,

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import {
   AddNoteBtn,
   Filter,
@@ -18,10 +18,15 @@ import { getNote } from '../../api-call/api-index';
 import { useDocumentTitle } from '../../hook/useDocumentTilte';
 
 export const HomePage = () => {
+  const [addBtnRef, setBtnRef] = useState();
+  const [btnFloat, setBtnFloat] = useState(false);
   const { notesList, setNotesList } = useNotesList();
   const { tagState, priorityState, sortByState } = useFilter();
   const { work, exercise, homework, creative } = tagState;
+
   const { token } = useToken();
+  const mainPageRef = useRef();
+
   useEffect(() => {
     (async () => {
       const response = await getNote(token);
@@ -47,15 +52,38 @@ export const HomePage = () => {
 
   useDocumentTitle('Take Notes');
 
+  const getBtnRef = (btnRef) => {
+    setBtnRef(btnRef);
+  };
+
   return (
     <>
       <SideNav />
-      <div className="main-page">
+      <div
+        className="main-page"
+        ref={mainPageRef}
+        onScroll={() => {
+          console.log(mainPageRef.current.scrollTop);
+          // if (addBtnRef.current.getBoundingClientRect().y <= -300) {
+          //   setBtnFloat(true);
+          // } else {
+          //   setBtnFloat(false);
+          // }
+          if (mainPageRef.current.scrollTop > 300) {
+            setBtnFloat(true);
+          } else {
+            setBtnFloat(false);
+          }
+        }}
+      >
         <main>
-          <div className="d-flex home-head">
-            <AddNoteBtn />
-          </div>
-          <div className="notes-info-section d-flex">
+          {/* <div className="d-flex home-head"> */}
+          <AddNoteBtn getBtnRef={getBtnRef} btnFloat={btnFloat} />
+          {/* </div> */}
+          <div
+            className="notes-info-section d-flex"
+            style={{ marginTop: `${btnFloat ? '15rem' : '0'}` }}
+          >
             <Filter />
           </div>
           <NotesInputModal />

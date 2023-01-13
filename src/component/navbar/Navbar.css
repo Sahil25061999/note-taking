@@ -85,7 +85,6 @@
   }
 
   .btn.logout {
-    color: var(--muted-color);
     font-weight: 800;
     padding: 8px 9.92px;
     border-width: 2px;
