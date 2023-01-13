@@ -63,12 +63,6 @@ export const HomePage = () => {
         className="main-page"
         ref={mainPageRef}
         onScroll={() => {
-          console.log(mainPageRef.current.scrollTop);
-          // if (addBtnRef.current.getBoundingClientRect().y <= -300) {
-          //   setBtnFloat(true);
-          // } else {
-          //   setBtnFloat(false);
-          // }
           if (mainPageRef.current.scrollTop > 300) {
             setBtnFloat(true);
           } else {
@@ -80,10 +74,7 @@ export const HomePage = () => {
           {/* <div className="d-flex home-head"> */}
           <AddNoteBtn getBtnRef={getBtnRef} btnFloat={btnFloat} />
           {/* </div> */}
-          <div
-            className="notes-info-section d-flex"
-            style={{ marginTop: `${btnFloat ? '15rem' : '0'}` }}
-          >
+          <div className="notes-info-section d-flex">
             <Filter />
           </div>
           <NotesInputModal />
