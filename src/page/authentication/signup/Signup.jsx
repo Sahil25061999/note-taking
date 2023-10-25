@@ -54,7 +54,7 @@ export const Signup = () => {
       errorDispatch({ type: 'PASSWORD_ERROR', payload: '' });
       return;
     }
-    errorDispatch({ type: 'PASSWORD_ERROR', payload: 'Input valid password' });
+    errorDispatch({ type: 'PASSWORD_ERROR', payload: 'Password must contains letters and numbers' });
     setUser({ ...user, password: '' });
   };
 
@@ -62,7 +62,7 @@ export const Signup = () => {
     if (e.target.value === user.password) {
       setUser({ ...user, confirmPassword: e.target.value });
       errorDispatch({ type: 'CONFIRM_PASSWORD_ERROR', payload: '' });
-      return;
+      return true
     }
 
     errorDispatch({
@@ -70,6 +70,7 @@ export const Signup = () => {
       payload: "Password don't match",
     });
     setUser({ ...user, confirmPassword: '' });
+    return false
   };
 
   const handleSignUp = async (e) => {
@@ -80,6 +81,13 @@ export const Signup = () => {
       user.password.length === 0 ||
       user.confirmPassword.length === 0
     ) {
+      return;
+    }
+    if(user.confirmPassword !== user.password){
+      errorDispatch({
+        type: 'CONFIRM_PASSWORD_ERROR',
+        payload: "Password don't match",
+      });
       return;
     }
     const response = await postSignup(user.fullname, user.email, user.password);
