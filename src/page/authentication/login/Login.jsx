@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import '../Authentication.css';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useToken } from '../../../context/context-index';
-import { postLogin } from '../../../api-call/api-index';
-import { useError } from '../../../reducer/useError';
-import { useDocumentTitle } from '../../../hook/useDocumentTilte';
+import React, { useState, useEffect } from "react";
+import "../Authentication.css";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useToken } from "../../../context/context-index";
+import { postLogin } from "../../../api-call/api-index";
+import { useError } from "../../../reducer/useError";
+import { useDocumentTitle } from "../../../hook/useDocumentTilte";
 export const Login = () => {
   const [user, setUser] = useState({
-    loginEmail: '',
-    loginPassword: '',
+    loginEmail: "test123@gmail.com",
+    loginPassword: "test123",
   });
   const [error, errorDispatch] = useError();
   const { emailError, passwordError } = error;
@@ -26,28 +26,32 @@ export const Login = () => {
     const response = await postLogin(user.loginEmail, user.loginPassword);
     if (response.status === 404) {
       errorDispatch({
-        type: 'EMAIL_ERROR',
-        payload: 'email doesnt exist',
+        type: "EMAIL_ERROR",
+        payload: "email doesnt exist",
       });
       return;
     }
     if (!Object.keys(response.data).length) {
-      errorDispatch({ type: 'PASSWORD_ERROR', payload: 'check password' });
+      errorDispatch({ type: "PASSWORD_ERROR", payload: "check password" });
     }
     if (response.data.encodedToken) {
-      localStorage.setItem('token', response.data.encodedToken);
-      setToken(localStorage.getItem('token'));
-      navigate(location.state?.from?.pathname || '/', { replace: true });
+      localStorage.setItem("token", response.data.encodedToken);
+      setToken(localStorage.getItem("token"));
+      setUser({
+        loginEmail: "test123@gmail.com",
+        loginPassword: "test123",
+      });
+      navigate(location.state?.from?.pathname || "/", { replace: true });
     }
   };
 
   useEffect(() => {
     if (token) {
-      navigate('/', { replace: true });
+      navigate("/", { replace: true });
     }
   }, []);
 
-  useDocumentTitle('Login In | Take Notes');
+  useDocumentTitle("Login In | Take Notes");
   return (
     <main className="authentication-body">
       <form action="" className="form-container login-container">
@@ -59,6 +63,7 @@ export const Login = () => {
               Email <span className="text-center error-msg">{emailError}</span>
             </label>
             <input
+              value={user.loginEmail}
               id="email"
               className="textbox"
               type="email"
@@ -67,13 +72,14 @@ export const Login = () => {
           </div>
           <div className="input-container">
             <label htmlFor="password">
-              Password{' '}
+              Password{" "}
               <span className="text-center error-msg">{passwordError}</span>
             </label>
             <input
+              value={user.loginPassword}
               id="password"
               className="textbox"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               onChange={(e) =>
                 setUser({ ...user, loginPassword: e.target.value })
               }
@@ -82,7 +88,7 @@ export const Login = () => {
             <span
               onClick={handleShowPassword}
               className={`fa-solid ${
-                showPassword ? 'fa-eye' : 'fa-eye-slash'
+                showPassword ? "fa-eye" : "fa-eye-slash"
               } password-eye-icon`}
             ></span>
           </div>
@@ -108,7 +114,7 @@ export const Login = () => {
               to="/signup"
               className="secondary-text-color form-signup-link"
             >
-              {' '}
+              {" "}
               Sign Up
             </Link>
           </p>

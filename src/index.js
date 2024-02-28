@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { BrowserRouter as Router } from 'react-router-dom';
-import { makeServer } from './server';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { BrowserRouter as Router } from "react-router-dom";
+import { makeServer } from "./server";
 import {
   TokenProvider,
   NotesListProvider,
@@ -11,15 +11,15 @@ import {
   NoteInputProvider,
   FilterProvider,
   DeleteListProvider,
-} from './context/context-index';
+} from "./context/context-index";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <TokenProvider>
+    <TokenProvider>
+      <Router>
         <FilterProvider>
           <DeleteListProvider>
             <ArchivesListProvider>
@@ -31,8 +31,8 @@ ReactDOM.render(
             </ArchivesListProvider>
           </DeleteListProvider>
         </FilterProvider>
-      </TokenProvider>
-    </Router>
+      </Router>
+    </TokenProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

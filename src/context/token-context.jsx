@@ -8,7 +8,7 @@ const TokenProvider = ({ children }) => {
 
   useEffect(() => {
     const tokenFromLocal = localStorage.getItem('token');
-    setToken(tokenFromLocal);
+    setToken(()=>tokenFromLocal);
   }, []);
 
   return (
